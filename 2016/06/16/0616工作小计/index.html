@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          docker小计 - 一个奇怪的角落
+          0617工作小计 - 一个奇怪的角落
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2017/05/27/docker小计/">
+    <link rel="canonical" href="http://yoursite-url/2016/06/16/0616工作小计/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -91,11 +91,11 @@
                         <div class="tags">
                             
                         </div>
-                        <h1>docker小计</h1>
+                        <h1>0617工作小计</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by if on
-                            2017-05-27
+                            2016-06-16
                         </span>
                     </div>
                 
@@ -226,35 +226,24 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="Docker-Engine"><a href="#Docker-Engine" class="headerlink" title="Docker Engine"></a>Docker Engine</h2><p>Docker Engine是Docker的大脑，docker指令是通过Engine运行，Engin的底层依赖Linux内核，也就是说Engin只能安装在Linux的各个发行版上，Mac OS 和 Windows 上无法直接运行Engine，需要借助一个装有lunux系统的虚拟机来。这个虚拟机被成之内Docker Machine(boot2dicker)</p>
-<h2 id="Docker-Machine"><a href="#Docker-Machine" class="headerlink" title="Docker Machine"></a>Docker Machine</h2><p>Docker Machine 以主机的形态封装了装有Docker Engine的虚拟机实例，Machine的出现是为了替代boot2docker，以统一全操作系统上的Docker管理。Machine的本地底层Driver是Ocacle VirtualBox，云提供商AWS、Microsoft Azure、Google Compute Engine和Digital Ocean等也提供了对Docker Machine的支持。相对于Docker Swarm而言，Machine创建的虚拟机实例是Docker集群上的一个节点（Node）。</p>
-<h2 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h2><p>Docker Swarm用于管理集群上的Node以及容器调度。Swarm的出现，渗透着Docker一同容器圈的野心。对于开发者来说，这一趋势的好处就是不用额外找解决方案，只需跟进docker自身的发展，就基本上够用了，坏处就是呗绑死在一家厂商身上，如果Docker产品线能解决的问题有局限，我们就很难跳出来了。</p>
-<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><p>Docker Compose 的前身是 fig，用于编排多个容器。其定位是为了开发者提供开发和测试环境，以节省时间、提高效率。Compose 不适用与大型生产环境的部署。</p>
-<h2 id="Docker-Toolbox"><a href="#Docker-Toolbox" class="headerlink" title="Docker Toolbox"></a>Docker Toolbox</h2><p>Docker Toolbox 是为了MAC os和Windows操作系统提供的一个工具箱，里面包含了Engine、Machine、Compose和镜像图形管理工具Kitematic。安装Docker Toolbox后。启动菜单就会多出两个图标、分别是Docker Quickstart Terminal 、Kitematic</p>
-<h2 id="Docker-image"><a href="#Docker-image" class="headerlink" title="Docker image"></a>Docker image</h2><pre><code>Remote docker hub
+                <ul>
+<li><p>spring MVC 整合Shiro</p>
+<blockquote>
+<p>整合教程<br>web.xml配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 配置Shiro过滤器,先让Shiro过滤系统接收到的请求 --&gt;</span>  </div><div class="line">  <span class="comment">&lt;!-- 这里filter-name必须对应applicationContext.xml中定义的&lt;bean id="shiroFilter"/&gt; --&gt;</span>  </div><div class="line">  <span class="comment">&lt;!-- 使用[/*]匹配所有请求,保证所有的可控请求都经过Shiro的过滤 --&gt;</span>  </div><div class="line">  <span class="comment">&lt;!-- 通常会将此filter-mapping放置到最前面(即其他filter-mapping前面),以保证它是过滤器链中第一个起作用的 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">filter</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span>  </div><div class="line">  <span class="comment">&lt;!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 --&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>targetFilterLifecycle<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">filter</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+</blockquote>
+<p>  ==================</p>
+<blockquote>
+<p>applicationContext.xml配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的ShiroDbRealm.java --&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myRealm"</span> <span class="attr">class</span>=<span class="string">"com.jadyer.realm.MyRealm"</span>/&gt;</span>    </div><div class="line"><span class="comment">&lt;!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session --&gt;</span>  </div><div class="line"><span class="comment">&lt;!-- 即&lt;property name="sessionMode" value="native"/&gt;,详细说明见官方文档 --&gt;</span>  </div><div class="line"><span class="comment">&lt;!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用'realms'属性代替 --&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"securityManager"</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.web.mgt.DefaultWebSecurityManager"</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"realm"</span> <span class="attr">ref</span>=<span class="string">"myRealm"</span>/&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>  </div><div class="line"><span class="comment">&lt;!-- Shiro主过滤器本身功能十分强大,其强大之处就在于它支持任何基于URL路径表达式的、自定义的过滤器的执行 --&gt;</span>  </div><div class="line"><span class="comment">&lt;!-- Web应用中,Shiro可控制的Web请求必须经过Shiro主过滤器的拦截,Shiro对基于Spring的Web应用提供了完美的支持 --&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"shiroFilter"</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.spring.web.ShiroFilterFactoryBean"</span>&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- Shiro的核心安全接口,这个属性是必须的 --&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"securityManager"</span> <span class="attr">ref</span>=<span class="string">"securityManager"</span>/&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 要求登录时的链接(可根据项目的URL进行替换),非必须的属性,默认会自动寻找Web工程根目录下的"/login.jsp"页面 --&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"loginUrl"</span> <span class="attr">value</span>=<span class="string">"/"</span>/&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 登录成功后要跳转的连接(本例中此属性用不到,因为登录成功后的处理逻辑在LoginController里硬编码为main.jsp了) --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- &lt;property name="successUrl" value="/system/main"/&gt; --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 用户访问未对其授权的资源时,所显示的连接 --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 若想更明显的测试此属性可以修改它的值,如unauthor.jsp,然后用[玄玉]登录后访问/admin/listUser.jsp就看见浏览器会显示unauthor.jsp --&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"unauthorizedUrl"</span> <span class="attr">value</span>=<span class="string">"/"</span>/&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- Shiro连接约束配置,即过滤链的定义 --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 此处可配合我的这篇文章来理解各个过滤连的作用http://blog.csdn.net/jadyer/article/details/12172839 --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 下面value值的第一个'/'代表的路径是相对于HttpServletRequest.getContextPath()的值来的 --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- anon：它对应的过滤器里面是空的,什么都没做,这里.do和.jsp后面的*表示参数,比方说login.jsp?main这种 --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- authc：该过滤器下的页面必须验证后才能访问,它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter --&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"filterChainDefinitions"</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>  </div><div class="line">             /mydemo/login=anon  </div><div class="line">             /mydemo/getVerifyCodeImage=anon  </div><div class="line">             /main**=authc  </div><div class="line">             /user/info**=authc  </div><div class="line">             /admin/listUser**=authc,perms[admin:manage]  </div><div class="line">        <span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>  </div><div class="line">  <span class="comment">&lt;!-- 保证实现了Shiro内部lifecycle函数的bean执行 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"lifecycleBeanPostProcessor"</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.spring.LifecycleBeanPostProcessor"</span>/&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 配置以下两个bean即可实现此功能 --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- Enable Shiro Annotations for Spring-configured beans. Only run after the lifecycleBeanProcessor has run --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 由于本例中并未使用Shiro注解,故注释掉这两个bean(个人觉得将权限通过注解的方式硬编码在程序中,查看起来不是很方便,没必要使用) --&gt;</span>  </div><div class="line">    <span class="comment">&lt;!--   </span></div><div class="line">      &lt;bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/&gt;  </div><div class="line">      &lt;bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"&gt;  </div><div class="line">        &lt;property name="securityManager" ref="securityManager"/&gt;  </div><div class="line">      &lt;/bean&gt;  </div><div class="line">    --&gt;</div></pre></td></tr></table></figure>
+<p><a href="http://my.oschina.net/miger/blog/283526" target="_blank" rel="external">http://my.oschina.net/miger/blog/283526</a></p>
+</blockquote>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
 
-集中存储镜像的Web服务器地址。该部分的存在是的可以区分从不同镜像库中拉去的镜像，若docker的镜像中缺少该部分，说明使用的是默认镜像库，即Docker官方镜像库
-
-NameSpace
-
-类似于github中的命名空间，是一个用户或组织中所有镜像的集合。
-
-Repository
-
-类似于Git仓库，一个仓库可以用多个镜像，不同的镜像通过tag来区分。
-
-Tag
-
-类似与Git仓库里面的tag，一般用来区分同一类镜像的不同版本
-
-layer
-
-镜像由一系列层组层，每层都用64位的十六进制数标示，非常类似于Git仓库中的commit
-
-image ID
-
-镜像最上层的layer ID就是该镜像的ID，Repo:tag提供了易于人类是别的名字，而ID便于脚本处理、操作镜像
-</code></pre>
                 
 
                 <hr>
@@ -262,13 +251,9 @@ image ID
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/05/27/MAC上安装oracle/" data-toggle="tooltip" data-placement="top" title="MAC上安装oracle">&larr; Previous Post</a>
+                            <a href="/2016/06/17/0617工作小计/" data-toggle="tooltip" data-placement="top" title="0617工作小计">&larr; Previous Post</a>
                         </li>
                     
-                    
-                        <li class="next">
-                            <a href="/2017/05/27/利用pyhton实现局域网传文件/" data-toggle="tooltip" data-placement="top" title="利用pyhton实现局域网传文件">Next Post &rarr;</a>
-                        </li>
                     
                 </ul>
 
@@ -339,8 +324,8 @@ image ID
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2017/05/27/docker小计/";
-    var disqus_url = "http://yoursite-url/2017/05/27/docker小计/";
+    var disqus_identifier = "http://yoursite-url/2016/06/16/0616工作小计/";
+    var disqus_url = "http://yoursite-url/2016/06/16/0616工作小计/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

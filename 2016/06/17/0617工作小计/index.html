@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          docker小计 - 一个奇怪的角落
+          0617工作小计 - 一个奇怪的角落
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2017/05/27/docker小计/">
+    <link rel="canonical" href="http://yoursite-url/2016/06/17/0617工作小计/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -91,11 +91,11 @@
                         <div class="tags">
                             
                         </div>
-                        <h1>docker小计</h1>
+                        <h1>0617工作小计</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by if on
-                            2017-05-27
+                            2016-06-17
                         </span>
                     </div>
                 
@@ -226,34 +226,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="Docker-Engine"><a href="#Docker-Engine" class="headerlink" title="Docker Engine"></a>Docker Engine</h2><p>Docker Engine是Docker的大脑，docker指令是通过Engine运行，Engin的底层依赖Linux内核，也就是说Engin只能安装在Linux的各个发行版上，Mac OS 和 Windows 上无法直接运行Engine，需要借助一个装有lunux系统的虚拟机来。这个虚拟机被成之内Docker Machine(boot2dicker)</p>
-<h2 id="Docker-Machine"><a href="#Docker-Machine" class="headerlink" title="Docker Machine"></a>Docker Machine</h2><p>Docker Machine 以主机的形态封装了装有Docker Engine的虚拟机实例，Machine的出现是为了替代boot2docker，以统一全操作系统上的Docker管理。Machine的本地底层Driver是Ocacle VirtualBox，云提供商AWS、Microsoft Azure、Google Compute Engine和Digital Ocean等也提供了对Docker Machine的支持。相对于Docker Swarm而言，Machine创建的虚拟机实例是Docker集群上的一个节点（Node）。</p>
-<h2 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h2><p>Docker Swarm用于管理集群上的Node以及容器调度。Swarm的出现，渗透着Docker一同容器圈的野心。对于开发者来说，这一趋势的好处就是不用额外找解决方案，只需跟进docker自身的发展，就基本上够用了，坏处就是呗绑死在一家厂商身上，如果Docker产品线能解决的问题有局限，我们就很难跳出来了。</p>
-<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><p>Docker Compose 的前身是 fig，用于编排多个容器。其定位是为了开发者提供开发和测试环境，以节省时间、提高效率。Compose 不适用与大型生产环境的部署。</p>
-<h2 id="Docker-Toolbox"><a href="#Docker-Toolbox" class="headerlink" title="Docker Toolbox"></a>Docker Toolbox</h2><p>Docker Toolbox 是为了MAC os和Windows操作系统提供的一个工具箱，里面包含了Engine、Machine、Compose和镜像图形管理工具Kitematic。安装Docker Toolbox后。启动菜单就会多出两个图标、分别是Docker Quickstart Terminal 、Kitematic</p>
-<h2 id="Docker-image"><a href="#Docker-image" class="headerlink" title="Docker image"></a>Docker image</h2><pre><code>Remote docker hub
-
-集中存储镜像的Web服务器地址。该部分的存在是的可以区分从不同镜像库中拉去的镜像，若docker的镜像中缺少该部分，说明使用的是默认镜像库，即Docker官方镜像库
-
-NameSpace
-
-类似于github中的命名空间，是一个用户或组织中所有镜像的集合。
-
-Repository
-
-类似于Git仓库，一个仓库可以用多个镜像，不同的镜像通过tag来区分。
-
-Tag
-
-类似与Git仓库里面的tag，一般用来区分同一类镜像的不同版本
-
-layer
-
-镜像由一系列层组层，每层都用64位的十六进制数标示，非常类似于Git仓库中的commit
-
-image ID
-
-镜像最上层的layer ID就是该镜像的ID，Repo:tag提供了易于人类是别的名字，而ID便于脚本处理、操作镜像
+                <h2 id="继续熟悉osc项目-Thrift"><a href="#继续熟悉osc项目-Thrift" class="headerlink" title="继续熟悉osc项目 Thrift"></a>继续熟悉osc项目 Thrift</h2><h2 id="ubuntu配置安装Thrift"><a href="#ubuntu配置安装Thrift" class="headerlink" title="ubuntu配置安装Thrift"></a>ubuntu配置安装Thrift</h2>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">① Required packages 安装相关支持包</div><div class="line"></div><div class="line">sudo apt-get <span class="keyword">install</span> libboost-dev libboost-<span class="keyword">test</span>-dev libboost-program-options-dev libevent-dev automake libtool flex bison pkg-config g++ libssl-dev</div><div class="line"></div><div class="line">② tar -xvf thrift<span class="number">-0.7</span><span class="number">.0</span>.tar.gz 解压缩文件</div><div class="line"></div><div class="line">③ cd thrift<span class="number">-0.7</span><span class="number">.0</span> 进入Thrift安装主目录</div><div class="line"></div><div class="line">④ ./configure (可能出现权限不够，请修改文件权限sudo chmod <span class="number">777</span> configure)</div><div class="line"></div><div class="line">⑤ sudo make</div><div class="line"></div><div class="line">⑥ sudo make <span class="keyword">install</span></div><div class="line">测试安装编译是否成功：</div><div class="line"></div><div class="line">在终端输入thrift出现下面的信息，</div><div class="line"></div><div class="line">ok，<span class="keyword">install</span> thrift success.</div><div class="line"></div><div class="line"><span class="keyword">Usage</span>: thrift [options] <span class="keyword">file</span></div><div class="line"></div><div class="line">Options:</div><div class="line"></div><div class="line">-<span class="keyword">version</span>    Print the compiler <span class="keyword">version</span></div><div class="line"></div><div class="line">-o dir      <span class="keyword">Set</span> the <span class="keyword">output</span> <span class="keyword">directory</span> <span class="keyword">for</span> gen-* packages</div><div class="line"></div><div class="line">(<span class="keyword">default</span>: <span class="keyword">current</span> <span class="keyword">directory</span>)</div><div class="line"></div><div class="line">-I dir      <span class="keyword">Add</span> a <span class="keyword">directory</span> <span class="keyword">to</span> the <span class="keyword">list</span> <span class="keyword">of</span> directories</div><div class="line"></div><div class="line">searched <span class="keyword">for</span> <span class="keyword">include</span> directives \</div><div class="line"></div><div class="line">-nowarn     Suppress all compiler <span class="keyword">warnings</span> (BAD!)</div></pre></td></tr></table></figure>
+<h2 id="编译Thrift支持Java的相关Jar文件"><a href="#编译Thrift支持Java的相关Jar文件" class="headerlink" title="编译Thrift支持Java的相关Jar文件"></a>编译Thrift支持Java的相关Jar文件</h2><pre><code><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">cd ./<span class="class"><span class="keyword">lib</span>/<span class="title">java</span></span></div><div class="line"></div><div class="line">然后编译ant (如果没有安装ant的话，sudo apt-get install ant，何为ant？类似c++的make)</div><div class="line"></div><div class="line">会生成一个build文件夹，里面存放的是Thrift支持JAVA的相关jar包</div><div class="line"></div><div class="line"><span class="number">3</span>、Thrift Tutorial (<span class="keyword">for</span> java) 测试教程</div><div class="line"></div><div class="line">使用Thrift Tutorial的具体步骤：</div><div class="line"></div><div class="line">cd ../../tutorial  进入Thrift自带的tutorial文件夹</div><div class="line"></div><div class="line">thrift -r --gen java tutorial.thrift生成gen-java目录</div><div class="line"></div><div class="line">cd java</div><div class="line"></div><div class="line">然后编译ant 生成相关java文件</div><div class="line"></div><div class="line">现在就可以运行demo进行测试了~</div><div class="line"></div><div class="line">开启服务端 ./JavaServer &amp;</div><div class="line"></div><div class="line">再打开一个终端，模拟客户端访问 ./JavaClient</div></pre></td></tr></table></figure>
 </code></pre>
                 
 
@@ -262,12 +236,12 @@ image ID
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/05/27/MAC上安装oracle/" data-toggle="tooltip" data-placement="top" title="MAC上安装oracle">&larr; Previous Post</a>
+                            <a href="/2016/06/20/hibernate小计/" data-toggle="tooltip" data-placement="top" title="hibernate小计">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2017/05/27/利用pyhton实现局域网传文件/" data-toggle="tooltip" data-placement="top" title="利用pyhton实现局域网传文件">Next Post &rarr;</a>
+                            <a href="/2016/06/16/0616工作小计/" data-toggle="tooltip" data-placement="top" title="0617工作小计">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -339,8 +313,8 @@ image ID
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2017/05/27/docker小计/";
-    var disqus_url = "http://yoursite-url/2017/05/27/docker小计/";
+    var disqus_identifier = "http://yoursite-url/2016/06/17/0617工作小计/";
+    var disqus_url = "http://yoursite-url/2016/06/17/0617工作小计/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
