@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          一个奇怪的角落
+          docker小计 - 一个奇怪的角落
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/archives/2017/">
+    <link rel="canonical" href="http://yoursite-url/2017/05/27/docker小计/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/undefined')
-            /*page*/
+            background-image: url('undefined')
+            /*post*/
         
     }
     
@@ -87,10 +87,16 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>你竟然找到了这里</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">一般也不会有人别人来到这个地方</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>docker小计</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by if on
+                            2017-05-27
+                        </span>
                     </div>
                 
 
@@ -207,234 +213,180 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 归档列表 -->
-            
-            
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-             <!-- 归档列表 -->
+                <h2 id="Docker-Engine"><a href="#Docker-Engine" class="headerlink" title="Docker Engine"></a>Docker Engine</h2><p>Docker Engine是Docker的大脑，docker指令是通过Engine运行，Engin的底层依赖Linux内核，也就是说Engin只能安装在Linux的各个发行版上，Mac OS 和 Windows 上无法直接运行Engine，需要借助一个装有lunux系统的虚拟机来。这个虚拟机被成之内Docker Machine(boot2dicker)</p>
+<h2 id="Docker-Machine"><a href="#Docker-Machine" class="headerlink" title="Docker Machine"></a>Docker Machine</h2><p>Docker Machine 以主机的形态封装了装有Docker Engine的虚拟机实例，Machine的出现是为了替代boot2docker，以统一全操作系统上的Docker管理。Machine的本地底层Driver是Ocacle VirtualBox，云提供商AWS、Microsoft Azure、Google Compute Engine和Digital Ocean等也提供了对Docker Machine的支持。相对于Docker Swarm而言，Machine创建的虚拟机实例是Docker集群上的一个节点（Node）。</p>
+<h2 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h2><p>Docker Swarm用于管理集群上的Node以及容器调度。Swarm的出现，渗透着Docker一同容器圈的野心。对于开发者来说，这一趋势的好处就是不用额外找解决方案，只需跟进docker自身的发展，就基本上够用了，坏处就是呗绑死在一家厂商身上，如果Docker产品线能解决的问题有局限，我们就很难跳出来了。</p>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><p>Docker Compose 的前身是 fig，用于编排多个容器。其定位是为了开发者提供开发和测试环境，以节省时间、提高效率。Compose 不适用与大型生产环境的部署。</p>
+<h2 id="Docker-Toolbox"><a href="#Docker-Toolbox" class="headerlink" title="Docker Toolbox"></a>Docker Toolbox</h2><p>Docker Toolbox 是为了MAC os和Windows操作系统提供的一个工具箱，里面包含了Engine、Machine、Compose和镜像图形管理工具Kitematic。安装Docker Toolbox后。启动菜单就会多出两个图标、分别是Docker Quickstart Terminal 、Kitematic</p>
+<h2 id="Docker-image"><a href="#Docker-image" class="headerlink" title="Docker image"></a>Docker image</h2><pre><code>Remote docker hub
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2017">
-                    <span class="tag-text">2017</span>
-                </span>
-                <ul>
+集中存储镜像的Web服务器地址。该部分的存在是的可以区分从不同镜像库中拉去的镜像，若docker的镜像中缺少该部分，说明使用的是默认镜像库，即Docker官方镜像库
+
+NameSpace
+
+类似于github中的命名空间，是一个用户或组织中所有镜像的集合。
+
+Repository
+
+类似于Git仓库，一个仓库可以用多个镜像，不同的镜像通过tag来区分。
+
+Tag
+
+类似与Git仓库里面的tag，一般用来区分同一类镜像的不同版本
+
+layer
+
+镜像由一系列层组层，每层都用64位的十六进制数标示，非常类似于Git仓库中的commit
+
+image ID
+
+镜像最上层的layer ID就是该镜像的ID，Repo:tag提供了易于人类是别的名字，而ID便于脚本处理、操作镜像
+</code></pre>
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    05-27
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2017/05/27/MAC上安装oracle/" style="color: #0085a1">
-                        <span>
-                            MAC上安装oracle
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    05-27
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2017/05/27/docker小计/" style="color: #0085a1">
-                        <span>
-                            docker小计
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    05-27
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2017/05/27/利用pyhton实现局域网传文件/" style="color: #0085a1">
-                        <span>
-                            利用pyhton实现局域网传文件
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    02-27
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2017/02/27/细数idea配置s2jh4net遇到的一些坑/" style="color: #0085a1">
-                        <span>
-                            细数idea配置s2jh4net遇到的一些坑
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/05/27/MAC上安装oracle/" data-toggle="tooltip" data-placement="top" title="MAC上安装oracle">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/05/27/利用pyhton实现局域网传文件/" data-toggle="tooltip" data-placement="top" title="利用pyhton实现局域网传文件">Next Post &rarr;</a>
+                        </li>
+                    
                 </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
             </div>
             
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
 
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
         </div>
     </div>
-</div>
+</article>
 
-                <!-- 如果开启评论功能 -->
-                
-            </div>
 
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
 
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-        
-    </div>
-</section>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2017/05/27/docker小计/";
+    var disqus_url = "http://yoursite-url/2017/05/27/docker小计/";
 
-        
-            <img id = "avatar_pic" src="/img/head.png" />
-        
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
-        
-            <p>Hi, i&#39;m John Doe</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
-                <li>
-                    <a target="_blank" href="http://weibo.com/叫我IF">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
 
-            
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/xdmdpz">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2017/05/27/MAC上安装oracle/">MAC上安装oracle</a>
-        </li>
-      
-        <li>
-          <a href="/2017/05/27/docker小计/">docker小计</a>
-        </li>
-      
-        <li>
-          <a href="/2017/05/27/利用pyhton实现局域网传文件/">利用pyhton实现局域网传文件</a>
-        </li>
-      
-        <li>
-          <a href="/2017/02/27/细数idea配置s2jh4net遇到的一些坑/">细数idea配置s2jh4net遇到的一些坑</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <hr>
-    
-        <!-- Friends Blog -->
-
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
-    
-        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
-    
-        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
-    
-        <li><a href="#" target="_blank">It Helps SEO</a></li>
-    
-</ul>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
