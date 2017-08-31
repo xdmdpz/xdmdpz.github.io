@@ -12,6 +12,8 @@
     <link rel="shortcut icon" href="/img/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <title>
         
           docker小计 - 一个奇怪的角落
@@ -23,9 +25,9 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/beantech.min.css">
-    
+
     <!-- Pygments Highlight CSS -->
     <link rel="stylesheet" href="/css/highlight.css">
 
@@ -142,13 +144,6 @@
 
                         
                         <li>
-                            <a href="/index0.html">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/">About</a>
                         </li>
                         
@@ -156,7 +151,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/index0.html">Archives</a>
                         </li>
                         
                     
@@ -164,6 +159,13 @@
                         
                         <li>
                             <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -255,7 +257,7 @@ image ID
 
 镜像最上层的layer ID就是该镜像的ID，Repo:tag提供了易于人类是别的名字，而ID便于脚本处理、操作镜像
 </code></pre>
-                
+
 
                 <hr>
                 <!-- Pager -->
@@ -276,23 +278,26 @@ image ID
                 
                 <!-- 多说 Share end-->
 
+                <!-- gitment start -->
+                
+                    <div id="container"></div>
+                
+                  <!-- gitment end -->
+
+
                 <!-- 多说评论框 start -->
                 
                 <!-- 多说评论框 end -->
 
                 <!-- disqus comment start -->
                 
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
                 <!-- disqus comment end -->
             </div>
-            
+
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
 
-                
+
             <!-- Sidebar Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
@@ -335,20 +340,24 @@ image ID
 
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "xdmdpz";
-    var disqus_identifier = "http://yoursite-url/2017/03/27/docker小计/";
-    var disqus_url = "http://yoursite-url/2017/03/27/docker小计/";
+<!-- gitment start -->
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: '写代码的摄影师',
+    repo: 'repo',
+    oauth: {
+      client_id: '2b847757e8c54f76a766',
+      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6',
+    },
+  })
+  gitment.render('container')
+  </script>
+
+  <!-- gitment end -->
+
+
 
 
 

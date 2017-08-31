@@ -12,6 +12,8 @@
     <link rel="shortcut icon" href="/img/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <title>
         
           hibernate小计 - 一个奇怪的角落
@@ -23,9 +25,9 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/beantech.min.css">
-    
+
     <!-- Pygments Highlight CSS -->
     <link rel="stylesheet" href="/css/highlight.css">
 
@@ -142,13 +144,6 @@
 
                         
                         <li>
-                            <a href="/index0.html">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/">About</a>
                         </li>
                         
@@ -156,7 +151,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/index0.html">Archives</a>
                         </li>
                         
                     
@@ -164,6 +159,13 @@
                         
                         <li>
                             <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -243,7 +245,7 @@
 <figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.url"</span>&gt;</span>jdbc:mysql://127.0.0.1:3306/test<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.username"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.password"</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--         &lt;property name="myeclipse.connection.profile"&gt;mydb&lt;/property&gt; --&gt;</span></div><div class="line"><span class="comment">&lt;!-- http://www.cnblogs.com/feilong3540717/archive/2011/12/19/2293038.html--&gt;</span></div><div class="line"><span class="comment">&lt;!--         &lt;property name="hbm2ddl.auto"&gt;create&lt;/property&gt; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">class</span>=<span class="string">"bean.Demo"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></div></pre></td></tr></table></figure>
 <h3 id="实体类注解详解"><a href="#实体类注解详解" class="headerlink" title="实体类注解详解"></a>实体类注解详解</h3><figure class="highlight golo"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div></pre></td><td class="code"><pre><div class="line">  /**</div><div class="line">  *</div><div class="line">  * <span class="meta">@author</span> liuguangyi</div><div class="line">  * <span class="meta">@content</span>  ejb3注解的API定义在javax.persistence.*包里面。</div><div class="line">  *</div><div class="line">  * 注释说明：</div><div class="line">  * <span class="meta">@Entity</span> —— 将一个类声明为一个实体bean(即一个持久化POJO类)</div><div class="line">  * <span class="meta">@Id</span> —— 注解声明了该实体bean的标识属性（对应表中的主键）。</div><div class="line">  * <span class="meta">@Table</span> —— 注解声明了该实体bean映射指定的表（table）,目录（catalog）和schema的名字</div><div class="line">  * <span class="meta">@Column</span> —— 注解声明了属性到列的映射。该注解有如下的属性</div><div class="line">  *  name  可选，列名（默认值是属性名）</div><div class="line">  *  unique 可选，是否在该列上设置唯一约束（默认值<span class="literal">false</span>）</div><div class="line">  *  nullable 可选，是否设置该列的值可以为空（默认值<span class="literal">false</span>）</div><div class="line">  *  insertable 可选，该列是否作为生成的insert语句中的一个列（默认值<span class="literal">true</span>）</div><div class="line">  *  updatable 可选，该列是否作为生成的update语句中的一个列（默认值<span class="literal">true</span>）</div><div class="line">  *  columnDefinition 可选，为这个特定列覆盖sql ddl片段（这可能导致无法在不同数据库间移植）</div><div class="line">  *  table 可选，定义对应的表（默认为主表）</div><div class="line">  *  length 可选，列长度（默认值<span class="number">255</span>）</div><div class="line">  *  precision 可选，列十进制精度（decimal precision)(默认值<span class="number">0</span>）</div><div class="line">  *  scale 可选，如果列十进制数值范围（decimal scale）可用，在此设置（默认值<span class="number">0</span>）</div><div class="line">  * <span class="meta">@GeneratedValue</span> —— 注解声明了主键的生成策略。该注解有如下属性</div><div class="line">  *  strategy 指定生成的策略（JPA定义的），这是一个GenerationType。默认是GenerationType. AUTO</div><div class="line">  *   GenerationType.AUTO 主键由程序控制</div><div class="line">  *   GenerationType.TABLE 使用一个特定的数据库表格来保存主键</div><div class="line">  *   GenerationType.IDENTITY 主键由数据库自动生成（主要是自动增长类型）</div><div class="line">  *   GenerationType.SEQUENCE 根据底层数据库的序列来生成主键，条件是数据库支持序列。（这个值要与generator一起使用）</div><div class="line">  *  generator 指定生成主键使用的生成器（可能是orcale中的序列）。</div><div class="line">  * <span class="meta">@SequenceGenerator</span> —— 注解声明了一个数据库序列。该注解有如下属性</div><div class="line">  *  name 表示该表主键生成策略名称，它被引用在<span class="meta">@GeneratedValue</span>中设置的“gernerator”值中</div><div class="line">  *  sequenceName 表示生成策略用到的数据库序列名称。</div><div class="line">  *  initialValue 表示主键初始值，默认为<span class="number">0.</span></div><div class="line">  *  allocationSize 每次主键值增加的大小，例如设置成<span class="number">1</span>，则表示每次创建新记录后自动加<span class="number">1</span>，默认为<span class="number">50.</span></div><div class="line">  * <span class="meta">@GenericGenerator</span> —— 注解声明了一个hibernate的主键生成策略。支持十三种策略。该注解有如下属性</div><div class="line">  *  name 指定生成器名称</div><div class="line">  *  strategy 指定具体生成器的类名（指定生成策略）。</div><div class="line">  *  parameters 得到strategy指定的具体生成器所用到的参数。</div><div class="line">  *    其十三种策略（strategy属性的值）如下：</div><div class="line">  *   <span class="number">1.</span>native 对于orcale采用Sequence方式，对于MySQL和SQL Server采用identity(处境主键生成机制)，</div><div class="line">  *     native就是将主键的生成工作将由数据库完成，hibernate不管（很常用）</div><div class="line">  *     例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)    </div><div class="line">  *          <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"native"</span>)</div><div class="line">  *      <span class="number">2.</span>uuid 采用<span class="number">128</span>位的uuid算法生成主键，uuid被编码为一个<span class="number">32</span>位<span class="number">16</span>进制数字的字符串。占用空间大（字符串类型）。</div><div class="line">  *       例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)    </div><div class="line">  *          <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"uuid"</span>)</div><div class="line">  *      <span class="number">3.</span>hilo 要在数据库中建立一张额外的表，默认表名为hibernate_unque_key，默认字段为integer类型，名称是next_hi（比较少用）</div><div class="line">  *       例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)    </div><div class="line">  *          <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"hilo"</span>)</div><div class="line">  *      <span class="number">4.</span>assigned 在插入数据的时候主键由程序处理（很常用），这是&lt;generator&gt;元素没有指定时的默认生成策略。等同于JPA中的AUTO。</div><div class="line">  *       例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)    </div><div class="line">  *          <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"assigned"</span>)</div><div class="line">  *      <span class="number">5.</span>identity 使用SQL Server和MySQL的自增字段，这个方法不能放到Oracle中，Oracle不支持自增字段，要设定sequence(MySQL和SQL Server中很常用)。等同于JPA中的IDENTITY</div><div class="line">  *       例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)    </div><div class="line">  *          <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"identity"</span>)</div><div class="line">  *      <span class="number">6.</span>select 使用触发器生成主键（主要用于早期的数据库主键生成机制，少用）</div><div class="line">  *       例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)    </div><div class="line">  *          <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"select"</span>)</div><div class="line">  *      <span class="number">7.</span>sequence 调用谨慎数据库的序列来生成主键，要设定序列名，不然hibernate无法找到。</div><div class="line">  *       例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)   </div><div class="line">  *   <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"sequence"</span>,    </div><div class="line">  *    parameters = &#123; <span class="meta">@Parameter</span>(name = <span class="string">"sequence"</span>, value = <span class="string">"seq_payablemoney"</span>) &#125;)</div><div class="line">  *  <span class="number">8.</span>seqhilo 通过hilo算法实现，但是主键历史保存在Sequence中，适用于支持Sequence的数据库，如Orcale(比较少用）</div><div class="line">  *  例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)   </div><div class="line">  *    <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"seqhilo"</span>,    </div><div class="line">  *    parameters = &#123; <span class="meta">@Parameter</span>(name = <span class="string">"max_lo"</span>, value = <span class="string">"5"</span>) &#125;)</div><div class="line">  *  <span class="number">9.</span>increnment 插入数据的时候hibernate会给主键添加一个自增的主键，但是一个hibernate实例就维护一个计数器，所以在多个实例运行的时候不能使用这个方法。</div><div class="line">  *   例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)    </div><div class="line">  *          <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"increnment"</span>)</div><div class="line">  *      <span class="number">10.</span>foreign 使用另一个相关的对象的主键。通常和&lt;one-to-one&gt;联合起来使用。</div><div class="line">  *      例：<span class="meta">@Id</span>    </div><div class="line">  *    <span class="meta">@GeneratedValue</span>(generator = <span class="string">"idGenerator"</span>)   </div><div class="line">  *    <span class="meta">@GenericGenerator</span>(name = <span class="string">"idGenerator"</span>, strategy = <span class="string">"foreign"</span>,    </div><div class="line">  *         parameters = &#123; <span class="meta">@Parameter</span>(name = <span class="string">"property"</span>, value = <span class="string">"info"</span>) &#125;)    </div><div class="line">  *    Integer id;</div><div class="line">  *   <span class="meta">@OneToOne</span>  </div><div class="line">  *   EmployeeInfo info;</div><div class="line">  *  <span class="number">11.</span>guid 采用数据库底层的guid算法机制，对应MySQL的uuid()函数，SQL Server的newid()函数，ORCALE的rawtohex(sys_guid())函数等</div><div class="line">  *  例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)     </div><div class="line">  *    <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"guid"</span>)</div><div class="line">  *  <span class="number">12.</span>uuid.hex 看uudi,建议用uuid替换</div><div class="line">  *    例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)     </div><div class="line">  *    <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"uuid.hex"</span>)</div><div class="line">  *  <span class="number">13.</span>sequence-identity sequence策略的扩展，采用立即检索策略来获取sequence值，需要JDBC3<span class="number">.0</span>和JDK4以上（含<span class="number">1.4</span>）版本</div><div class="line">  *       例：<span class="meta">@GeneratedValue</span>(generator = <span class="string">"paymentableGenerator"</span>)   </div><div class="line">  *   <span class="meta">@GenericGenerator</span>(name = <span class="string">"paymentableGenerator"</span>, strategy = <span class="string">"sequence-identity"</span>,    </div><div class="line">  *         parameters = &#123; <span class="meta">@Parameter</span>(name = <span class="string">"sequence"</span>, value = <span class="string">"seq_payablemoney"</span>) &#125;)  </div><div class="line">  *      </div><div class="line">  * <span class="meta">@OneToOne</span> 设置一对一个关联。cascade属性有五个值(只有CascadeType.ALL好用？很奇怪)，分别是CascadeType.PERSIST(级联新建)，CascadeType.REMOVE（级联删除），CascadeType.REFRESH（级联刷新），CascadeType.MERGE（级联更新），CascadeType.ALL（全部四项）</div><div class="line">  *    方法一</div><div class="line">  *     主表： ?<span class="meta">@OneToOne</span>(cascade = CascadeType.ALL)</div><div class="line">  *      <span class="meta">@PrimaryKeyJoinColumn</span></div><div class="line">  *      public 从表类 get从表类()&#123;<span class="keyword">return</span> 从表对象&#125;</div><div class="line">  *      从表：没有主表类。</div><div class="line">  *      注意：这种方法要求主表与从表的主键值想对应。</div><div class="line">  *   方法二</div><div class="line">  *      主表：?<span class="meta">@OneToOne</span>(cascade = CascadeType.ALL)</div><div class="line">  *          <span class="meta">@JoinColumn</span>(name=<span class="string">"主表外键"</span>) //这里指定的是数据库中的外键字段。</div><div class="line">  *          public 从表类 get从表类()&#123;<span class="keyword">return</span> 从表类&#125;</div><div class="line">  *      从表：<span class="meta">@OneToOne</span>(mappedBy = <span class="string">"主表类中的从表属性"</span>)//例主表User中有一个从表属性是Heart类型的heart，这里就填heart</div><div class="line">  *          public 主表类 get主表类()&#123;<span class="keyword">return</span> 主表对象&#125;</div><div class="line">  *      注意：<span class="meta">@JoinColumn</span>是可选的。默认值是从表变量名+<span class="string">"_"</span>+从表的主键（注意，这里加的是主键。而不是主键对应的变量）。</div><div class="line">  * 方法三</div><div class="line">  *      主表：<span class="meta">@OneToOne</span>(cascade=CascadeType.ALL)</div><div class="line">  *          <span class="meta">@JoinTable</span>( name=<span class="string">"关联表名"</span>,</div><div class="line">  *    joinColumns = <span class="meta">@JoinColumn</span>(name=<span class="string">"主表外键"</span>),</div><div class="line">  *    inverseJoinColumns = <span class="meta">@JoinColumns</span>(name=<span class="string">"从表外键"</span>)</div><div class="line">  *          )</div><div class="line">  *      从表：<span class="meta">@OneToOne</span>(mappedBy = <span class="string">"主表类中的从表属性"</span>)//例主表User中有一个从表属性是Heart类型的heart，这里就填heart</div><div class="line">  *          public 主表类 get主表类()&#123;<span class="keyword">return</span> 主表对象&#125;    </div><div class="line">  *  <span class="meta">@ManyToOne</span> 设置多对一关联</div><div class="line">  *    方法一       </div><div class="line">  *    <span class="meta">@ManyToOne</span>(cascade=&#123;CasCadeType.PERSIST,CascadeType.MERGE&#125;)</div><div class="line">  *    <span class="meta">@JoinColumn</span>(name=<span class="string">"外键"</span>)</div><div class="line">  *    public 主表类 get主表类()&#123;<span class="keyword">return</span> 主表对象&#125;</div><div class="line">  *    方法二</div><div class="line">  *    <span class="meta">@ManyToOne</span>(cascade=&#123;CascadeType.PERSIST,CascadeType.MERGE&#125;)</div><div class="line">  *    <span class="meta">@JoinTable</span>(name=<span class="string">"关联表名"</span>，</div><div class="line">  *     joinColumns = <span class="meta">@JoinColumn</span>(name=<span class="string">"主表外键"</span>),</div><div class="line">  *     inverseJoinColumns = <span class="meta">@JoinColumns</span>(name=<span class="string">"从表外键"</span>)</div><div class="line">  *    )</div><div class="line">  *  <span class="meta">@OneToMany</span> 设置一对多关联。cascade属性指定关联级别,参考<span class="meta">@OneToOne</span>中的说明。fetch指定是否延迟加载，值为FetchType.LAZY表示延迟，为FetchType.EAGER表示立即加载</div><div class="line">  *    方法一     使用这种配置，在为“一端”添加“多端”时，不会修改“多端”的外键。在“一端”加载时，不会得到“多端”。如果使用延迟加载，在读“多端”列表时会出异常，立即加载在得到多端时，是一个空集合（集合元素为<span class="number">0</span>）。</div><div class="line">  *    “一端”配置</div><div class="line">  *    <span class="meta">@OneToMany</span>(mappedBy=<span class="string">"“多端”的属性"</span>)</div><div class="line">  *    public List&lt;“多端”类&gt; get“多端”列表()&#123;<span class="keyword">return</span> “多端”列表&#125;</div><div class="line">  *    “多端”配置参考<span class="meta">@ManyToOne</span>.     </div><div class="line">  *    方法二</div><div class="line">  *    “一端”配置</div><div class="line">  *    <span class="meta">@OneToMany</span>(mappedBy=<span class="string">"“多端”的属性"</span>)</div><div class="line">  *    <span class="meta">@MapKey</span>(name=<span class="string">"“多端”做为Key的属性"</span>)</div><div class="line">  *    public Map&lt;“多端”做为Key的属性的类,主表类&gt; get“多端”列表（）&#123;<span class="keyword">return</span> “多端”列表&#125;</div><div class="line">  *    “多端”配置参考<span class="meta">@ManyToOne</span>.</div><div class="line">  *    方法三 使用这种配置，在为“一端”添加“多端”时，可以修改“多端”的外键。</div><div class="line">  *    “一端”配置</div><div class="line">  *    <span class="meta">@OneToMany</span></div><div class="line">  *    <span class="meta">@JoinColumn</span>(name=<span class="string">"“多端”外键"</span>)</div><div class="line">  *    public List&lt;“多端”类&gt; get“多端”列表()&#123;<span class="keyword">return</span> “多端”列表&#125;</div><div class="line">  *    “多端”配置参考<span class="meta">@ManyToOne</span>.     </div><div class="line">  *    </div><div class="line">  *   </div><div class="line">*/</div></pre></td></tr></table></figure>
 
-                
+
 
                 <hr>
                 <!-- Pager -->
@@ -264,23 +266,26 @@
                 
                 <!-- 多说 Share end-->
 
+                <!-- gitment start -->
+                
+                    <div id="container"></div>
+                
+                  <!-- gitment end -->
+
+
                 <!-- 多说评论框 start -->
                 
                 <!-- 多说评论框 end -->
 
                 <!-- disqus comment start -->
                 
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
                 <!-- disqus comment end -->
             </div>
-            
+
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
 
-                
+
             <!-- Sidebar Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
@@ -323,20 +328,24 @@
 
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "xdmdpz";
-    var disqus_identifier = "http://yoursite-url/2016/06/20/hibernate小计/";
-    var disqus_url = "http://yoursite-url/2016/06/20/hibernate小计/";
+<!-- gitment start -->
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: '写代码的摄影师',
+    repo: 'repo',
+    oauth: {
+      client_id: '2b847757e8c54f76a766',
+      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6',
+    },
+  })
+  gitment.render('container')
+  </script>
+
+  <!-- gitment end -->
+
+
 
 
 

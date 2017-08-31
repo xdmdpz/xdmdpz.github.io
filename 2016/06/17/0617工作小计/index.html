@@ -12,6 +12,8 @@
     <link rel="shortcut icon" href="/img/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <title>
         
           0617工作小计 - 一个奇怪的角落
@@ -23,9 +25,9 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Custom CSS --> 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/beantech.min.css">
-    
+
     <!-- Pygments Highlight CSS -->
     <link rel="stylesheet" href="/css/highlight.css">
 
@@ -142,13 +144,6 @@
 
                         
                         <li>
-                            <a href="/index0.html">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/">About</a>
                         </li>
                         
@@ -156,7 +151,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/index0.html">Archives</a>
                         </li>
                         
                     
@@ -164,6 +159,13 @@
                         
                         <li>
                             <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -229,7 +231,7 @@
                 <h2 id="继续熟悉osc项目-Thrift"><a href="#继续熟悉osc项目-Thrift" class="headerlink" title="继续熟悉osc项目 Thrift"></a>继续熟悉osc项目 Thrift</h2><h2 id="ubuntu配置安装Thrift"><a href="#ubuntu配置安装Thrift" class="headerlink" title="ubuntu配置安装Thrift"></a>ubuntu配置安装Thrift</h2>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">① Required packages 安装相关支持包</div><div class="line"></div><div class="line">sudo apt-get <span class="keyword">install</span> libboost-dev libboost-<span class="keyword">test</span>-dev libboost-program-options-dev libevent-dev automake libtool flex bison pkg-config g++ libssl-dev</div><div class="line"></div><div class="line">② tar -xvf thrift<span class="number">-0.7</span><span class="number">.0</span>.tar.gz 解压缩文件</div><div class="line"></div><div class="line">③ cd thrift<span class="number">-0.7</span><span class="number">.0</span> 进入Thrift安装主目录</div><div class="line"></div><div class="line">④ ./configure (可能出现权限不够，请修改文件权限sudo chmod <span class="number">777</span> configure)</div><div class="line"></div><div class="line">⑤ sudo make</div><div class="line"></div><div class="line">⑥ sudo make <span class="keyword">install</span></div><div class="line">测试安装编译是否成功：</div><div class="line"></div><div class="line">在终端输入thrift出现下面的信息，</div><div class="line"></div><div class="line">ok，<span class="keyword">install</span> thrift success.</div><div class="line"></div><div class="line"><span class="keyword">Usage</span>: thrift [options] <span class="keyword">file</span></div><div class="line"></div><div class="line">Options:</div><div class="line"></div><div class="line">-<span class="keyword">version</span>    Print the compiler <span class="keyword">version</span></div><div class="line"></div><div class="line">-o dir      <span class="keyword">Set</span> the <span class="keyword">output</span> <span class="keyword">directory</span> <span class="keyword">for</span> gen-* packages</div><div class="line"></div><div class="line">(<span class="keyword">default</span>: <span class="keyword">current</span> <span class="keyword">directory</span>)</div><div class="line"></div><div class="line">-I dir      <span class="keyword">Add</span> a <span class="keyword">directory</span> <span class="keyword">to</span> the <span class="keyword">list</span> <span class="keyword">of</span> directories</div><div class="line"></div><div class="line">searched <span class="keyword">for</span> <span class="keyword">include</span> directives \</div><div class="line"></div><div class="line">-nowarn     Suppress all compiler <span class="keyword">warnings</span> (BAD!)</div></pre></td></tr></table></figure>
 <h2 id="编译Thrift支持Java的相关Jar文件"><a href="#编译Thrift支持Java的相关Jar文件" class="headerlink" title="编译Thrift支持Java的相关Jar文件"></a>编译Thrift支持Java的相关Jar文件</h2><pre><code><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">cd ./<span class="class"><span class="keyword">lib</span>/<span class="title">java</span></span></div><div class="line"></div><div class="line">然后编译ant (如果没有安装ant的话，sudo apt-get install ant，何为ant？类似c++的make)</div><div class="line"></div><div class="line">会生成一个build文件夹，里面存放的是Thrift支持JAVA的相关jar包</div><div class="line"></div><div class="line"><span class="number">3</span>、Thrift Tutorial (<span class="keyword">for</span> java) 测试教程</div><div class="line"></div><div class="line">使用Thrift Tutorial的具体步骤：</div><div class="line"></div><div class="line">cd ../../tutorial  进入Thrift自带的tutorial文件夹</div><div class="line"></div><div class="line">thrift -r --gen java tutorial.thrift生成gen-java目录</div><div class="line"></div><div class="line">cd java</div><div class="line"></div><div class="line">然后编译ant 生成相关java文件</div><div class="line"></div><div class="line">现在就可以运行demo进行测试了~</div><div class="line"></div><div class="line">开启服务端 ./JavaServer &amp;</div><div class="line"></div><div class="line">再打开一个终端，模拟客户端访问 ./JavaClient</div></pre></td></tr></table></figure>
 </code></pre>
-                
+
 
                 <hr>
                 <!-- Pager -->
@@ -250,23 +252,26 @@
                 
                 <!-- 多说 Share end-->
 
+                <!-- gitment start -->
+                
+                    <div id="container"></div>
+                
+                  <!-- gitment end -->
+
+
                 <!-- 多说评论框 start -->
                 
                 <!-- 多说评论框 end -->
 
                 <!-- disqus comment start -->
                 
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
                 <!-- disqus comment end -->
             </div>
-            
+
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
 
-                
+
             <!-- Sidebar Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
@@ -309,20 +314,24 @@
 
 
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "xdmdpz";
-    var disqus_identifier = "http://yoursite-url/2016/06/17/0617工作小计/";
-    var disqus_url = "http://yoursite-url/2016/06/17/0617工作小计/";
+<!-- gitment start -->
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: '写代码的摄影师',
+    repo: 'repo',
+    oauth: {
+      client_id: '2b847757e8c54f76a766',
+      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6',
+    },
+  })
+  gitment.render('container')
+  </script>
+
+  <!-- gitment end -->
+
+
 
 
 
