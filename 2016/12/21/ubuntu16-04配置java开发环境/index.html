@@ -144,14 +144,14 @@
 
                         
                         <li>
-                            <a href="/index0.html">Archives</a>
+                            <a href="/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/">About</a>
+                            <a href="/index0.html">Archives</a>
                         </li>
                         
                     
@@ -338,16 +338,26 @@
 <!-- gitment start -->
 
   <script>
+  // var gitment = new Gitment({
+  //   // id: '页面 ID', // 可选。默认为 location.href
+  //   owner: 'xdmdpz',
+  //   repo: 'xdmdpz.github.io',
+  //   oauth: {
+  //     client_id: '2b847757e8c54f76a766',
+  //     client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6',
+  //   },
+  // })
+  // gitment.render('container')
   var gitment = new Gitment({
-    // id: '页面 ID', // 可选。默认为 location.href
-    owner: 'xdmdpz',
-    repo: 'xdmdpz.github.io',
-    oauth: {
-      client_id: '2b847757e8c54f76a766',
-      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6',
-    },
-  })
-  gitment.render('container')
+   id: '页面 ID', // 可选。默认为 location.href
+   owner: '你的 GitHub ID', // 可以是你的GitHub用户名，也可以是github id
+   repo: '存储评论的 github repo',
+   oauth: {
+     client_id: '你的 client id',
+     client_secret: '你的 client secret',
+   },
+ })
+ gitment.render('container')
   </script>
 
   <!-- gitment end -->
