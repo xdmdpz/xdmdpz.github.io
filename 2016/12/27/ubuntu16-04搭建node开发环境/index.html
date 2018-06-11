@@ -16,11 +16,11 @@
     <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <title>
         
-          Tags - 一个奇怪的角落
+          ubuntu16.04搭建node开发环境 - 一个奇怪的角落
         
     </title>
 
-    <link rel="canonical" href="http://www.xdmdpz.com/tags/">
+    <link rel="canonical" href="http://www.xdmdpz.com/2016/12/27/ubuntu16-04搭建node开发环境/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,8 +71,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/tag-bg.png')
-            /*page*/
+            background-image: url('undefined')
+            /*post*/
         
     }
     
@@ -89,10 +89,16 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Tags</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Hey, this is Tags.</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>ubuntu16.04搭建node开发环境</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by if on
+                            2016-12-27
+                        </span>
                     </div>
                 
 
@@ -209,71 +215,210 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
-                
-                    <a href="#sqlite" title="sqlite" rel="1">sqlite</a>
-                
-                    <a href="#http python" title="http python" rel="1">http python</a>
-                
-            </div>
+    <!-- Modify by Yu-Hsuan Yen -->
 
-            <!-- 标签列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="sqlite">
-                    <span class="tag-text">sqlite</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2015/09/27/java-sqlite备忘/">
-                        <h2 class="post-title">
-                            java-sqlite备忘
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <ul>
+<li><h2 id="通过-apt-get"><a href="#通过-apt-get" class="headerlink" title="通过 apt-get"></a>通过 apt-get</h2><h3 id="什么是apt-get"><a href="#什么是apt-get" class="headerlink" title="什么是apt-get"></a>什么是apt-get</h3><pre><code>Advanced Package Tool，又名apt-get，是一款适用于Unix和Linux系统的应用程序管理器。最初于1998年发布，用于检索应用程序并将其加载到Debian Linux系统。Apt-get成名的原因之一在于其出色的解决软件依赖关系的能力。其通常使用.deb-formatted文件，但经过修改后可以使用apt-rpm处理红帽的Package Manager（RPM）文件。
+</code></pre><p>  每个系统都有适合自己的包管理工具，如debian系的<code>apt-get</code>,Fedora和RedHat系的<code>yum</code>，macOS的<code>homebrow</code></p>
+<p>  以前经常用ubuntu的安装包管理器<code>apt-get</code>安装nodeJs和npm  如果只使用node的基本功能可以直接使用如下命令</p>
+<pre><code>`$ sudo apt-get install nodejs`
+`$ sudo apt-get install npm`
+</code></pre><p>  因为使用 apt-get 安装的 node 的包管理工具 npm 并没有初始安装，所以需要安装 npm</p>
+</li>
+<li><h2 id="通过-nvm"><a href="#通过-nvm" class="headerlink" title="通过 nvm"></a>通过 nvm</h2><h3 id="什么是nvm"><a href="#什么是nvm" class="headerlink" title="什么是nvm"></a>什么是nvm</h3><pre><code>nvm是一个开源的 Node 版本管理器，通过简单的 bash 脚本来管理、切换多个 Node.js版本,使用nvm可以安装官网最新版本之前的任意版本,可以任意切换不同版本
+</code></pre><p>  安装 nvm 通过curl</p>
+<pre><code>$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash  
+</code></pre><p>  安装nvm 通过wget</p>
+<pre><code>$ wget -O- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash  
+</code></pre><p>  重启控制台，查看nvm版本</p>
+<pre><code>$ nvm -v
+</code></pre><p>  如果命令无效，去<code>~/.bashrc</code>里面完善<code>nvm</code>环境变量</p>
+<pre><code>export NVM_DIR=&quot;/Users/YOURUSERNAME/.nvm&quot;  
+[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm  
+</code></pre><h3 id="查看可用的node版本"><a href="#查看可用的node版本" class="headerlink" title="查看可用的node版本"></a>查看可用的node版本</h3><pre><code>$ nvm ls-remote  
+</code></pre><h3 id="安装指定版本node，我安装的是6-10-3"><a href="#安装指定版本node，我安装的是6-10-3" class="headerlink" title="安装指定版本node，我安装的是6.10.3"></a>安装指定版本node，我安装的是6.10.3</h3><pre><code>$ nvm install v6.10.3
+</code></pre><h3 id="查看系统里安装的nodejs版本"><a href="#查看系统里安装的nodejs版本" class="headerlink" title="查看系统里安装的nodejs版本"></a>查看系统里安装的nodejs版本</h3><pre><code>$ nvm list
+</code></pre><h3 id="选择指定版本nodejs"><a href="#选择指定版本nodejs" class="headerlink" title="选择指定版本nodejs"></a>选择指定版本nodejs</h3><pre><code>$  nvm use v6.10.3
+</code></pre><p>  再次<code>nvm list</code>后会看到一个标记使用的文字提醒</p>
+<h3 id="选择默认版本"><a href="#选择默认版本" class="headerlink" title="选择默认版本"></a>选择默认版本</h3><pre><code>$ nvm alias default v6.10.3
+</code></pre><p>  卸载某个 node 版本,例如卸载 v4.4.5 版本</p>
+<pre><code>$ nvm uninstall v4.4.5
+</code></pre></li>
+<li><h2 id="两个版本差异"><a href="#两个版本差异" class="headerlink" title="两个版本差异"></a>两个版本差异</h2><h4 id="apt-get"><a href="#apt-get" class="headerlink" title="apt-get"></a>apt-get</h4><pre><code>不是最新版本（在linux下默认源中没有 node 的程序），安装的版本有且只有一个，而且执行sudo命令的时候，是以超级管理员身份运行，以后你用npm如果是以超级管理员权限执行的，所以别人就可以更改系统文件，会造成安全性问题，假如别人上传了一个不太好的npm包，里面的脚本实际上是删除系统文件，让你装一下，说帮他测试一下，你install完，sudo一执行。他就可以改系统文件了，那就完蛋了...但前提是你使用了sudo
+</code></pre><h4 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h4><pre><code>可以供我们选择要安装的版本，并且则解决了多版本共存、切换问题，但在安装之前，请确认本机以前的安装包已经被卸载
+</code></pre></li>
+<li><h2 id="安装目录-（终端通过-whereis-node-查看）"><a href="#安装目录-（终端通过-whereis-node-查看）" class="headerlink" title="安装目录 （终端通过 whereis node 查看）"></a>安装目录 （终端通过 whereis node 查看）</h2><h4 id="apt-get-1"><a href="#apt-get-1" class="headerlink" title="apt-get"></a>apt-get</h4><pre><code>/usr/local/bin/node
+</code></pre><h4 id="nvm-1"><a href="#nvm-1" class="headerlink" title="nvm"></a>nvm</h4><pre><code>/home/__用户__/.nvm/versions/node/v6.10.3/bin/node
+</code></pre></li>
+<li><h2 id="淘宝NPM扩展"><a href="#淘宝NPM扩展" class="headerlink" title="淘宝NPM扩展"></a>淘宝NPM扩展</h2><p>  直接用npm全局安装</p>
+<pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org  
+</code></pre></li>
+<li><p>##node相关操作</p>
+<p>  查看node版本</p>
+<pre><code>`$ node --version`
+</code></pre><p>  查看npm版本</p>
+<pre><code>`$ npm  --version`
+</code></pre><p>  进入 node 环境</p>
+<pre><code>$  node
+或
+$ nodejs
+出现&gt; 符号则进入成功
+</code></pre><p>  运行js文件</p>
+<pre><code>$ nodejs hello.js
+或
+$ node hello.js
+</code></pre></li>
+</ul>
+
+
+
                 <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/12/30/centos备忘/" data-toggle="tooltip" data-placement="top" title="centos备忘">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/21/ubuntu16-04配置java开发环境/" data-toggle="tooltip" data-placement="top" title="ubuntu16.04配置java开发环境">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
                 
+                <!-- 多说 Share end-->
+
+                <!-- gitment start -->
+                
+                    <div id="container"></div>
+                
+                  <!-- gitment end -->
+
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
             </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="http python">
-                    <span class="tag-text">http python</span>
-                </span>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/05/26/利用pyhton实现局域网传文件/">
-                        <h2 class="post-title">
-                            利用pyhton实现局域网传文件
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
                 <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                </ul>
                 
             </div>
-            
-
-
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- gitment start -->
+
+  <script type="text/javascript">
+  var gitment = new Gitment({
+    owner: 'xdmdpz',
+    repo: 'xdmdpz.github.io',
+    oauth: {
+      client_id: '2b847757e8c54f76a766',
+      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6'
+    }
+  })
+  gitment.render('container')
+  </script>
+
+  <!-- gitment end -->
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

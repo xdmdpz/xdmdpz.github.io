@@ -20,7 +20,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://www.xdmdpz.com/">
+    <link rel="canonical" href="http://www.xdmdpz.com/archives/2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -229,22 +229,31 @@
 
 <div class="post-preview">
 
-    <a href="/2018/09/26/简历/">
+    <a href="/2016/12/21/ubuntu16-04配置java开发环境/">
         <h2 class="post-title">
-            简历
+            ubuntu16.04配置java开发环境
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-...
+            建立jdk存放路径
+# mkdir /usr/lib/jvm
+
+解压jdk到指定目录
+# tar -C /usr/lib/jvm -xzf jdk-7u55-linux-x64.tar.gz
+
+打开配置文件
+#  vi /etc/profile
+
+在profile最后一行插入
+123export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_21  export CLASS......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2018-09-26
+            2016-12-21
         </p>
         <div class="tags">
             
@@ -256,40 +265,21 @@
 
 <div class="post-preview">
 
-    <a href="/2017/09/29/170929vagrant_java环境/">
+    <a href="/2016/07/21/spring整合Quartz/">
         <h2 class="post-title">
-            vagrant搭建的java环境
+            spring整合Quartz
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-ubuntu 16.04
-jdk8
-tomcat8
-mysql5.7
-Redis
-maven
-gradle
-
-vagrant 具体操作请移步 vagrant小计
-快速体验
-
-安装vagrant  下载地址
-
-安装virtual 下载地址
-
-把下载的 box加到box列表
-
-vagrant box add ubuntu_dev ~/Download/ubuntu_dev.box
-ubuntu......
+            pom.xml1234567891011121314151617181920212223242526  &lt;properties&gt;   &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;   &lt;spring.version&gt;3.2.9.RELEASE&lt;/spr......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2017-09-29
+            2016-07-21
         </p>
         <div class="tags">
             
@@ -301,27 +291,27 @@ ubuntu......
 
 <div class="post-preview">
 
-    <a href="/2017/09/29/170920-vagrant小计/">
+    <a href="/2016/07/10/mybaits-generator/">
         <h2 class="post-title">
-            vagrant  小计
+            mybaits-generator
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-             Vagrant并不提供虚拟化技术，本质上是一个虚拟机外挂，通过虚拟机的管理接口来管理虚拟机，让用户更轻松的进行一些常用配置，比如：CPU/Memory/IP/DISK等分配。并且提供了一些其它的管理操作：比如开机运行指定命令，镜像二次打包，插件编写等等。
-  Vagrant更适合用于开发环境，统一团队间的开发环境。
-  下面快速体验一下vagrant
+            
+去github上clone项目&gt; https://github.com/mybatis/generator.git
 
-下载地址
+安装插件&gt; 把eclipse/UpdateSite/features和eclipse/UpdateSite/plugins两个文件夹都放到你eclipse或者是Myeclipse的根目录里面  
+&gt; 重启eclipse或Myeclipse
 
-vagrant -v 查......
+pom.xml......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2017-09-29
+            2016-07-10
         </p>
         <div class="tags">
             
@@ -333,27 +323,24 @@ vagrant -v 查......
 
 <div class="post-preview">
 
-    <a href="/2017/05/27/MAC上安装oracle/">
+    <a href="/2016/06/20/hibernate小计/">
         <h2 class="post-title">
-            MAC上安装oracle
+            hibernate小计
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            学校准备oracle考试
-自己带电脑
-想想上个月才换的二手mbp瞬间尴尬
-官方文档上面的MAC oracle真的没有兴趣坑 而且好像版本才到10g
-然后想想最近在研究docker，用科学的上网方式一看，果然可以
-然后在github上看到了一个项目 docker-oracle-xe-11g觉得可以搞一搞
-折腾过程首先安装Docker Toolbox（傻瓜式的集成环境，Windows也有同款）首......
+            hibernate配置速查
+maven pom.xml配置
+
+12345678910111213141516171819202122232425262728293031323334353637&lt;!-- hibernate --&gt;  &lt;dependency&gt;    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;    &lt;a......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2017-05-27
+            2016-06-20
         </p>
         <div class="tags">
             
@@ -365,63 +352,21 @@ vagrant -v 查......
 
 <div class="post-preview">
 
-    <a href="/2017/05/26/利用pyhton实现局域网传文件/">
+    <a href="/2016/06/17/0617工作小计/">
         <h2 class="post-title">
-            利用pyhton实现局域网传文件
+            0617工作小计
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            工作的时候经常遇到传文件
-传qq离线文件又太慢。
-同事们用的系统也各种各样
-在了解python的时候发现可以通过创建一个简单的http服务来解决问题
-准备工作 pyhton环境
-Linux
-ubuntu sudo apt-get install pythoncentOS sudo yum install python
-
-Mac
-下载homeBrew /usr/bin/ruby -e &quo......
+            继续熟悉osc项目 Thriftubuntu配置安装Thrift  12345678910111213141516171819202122232425262728293031323334① Required packages 安装相关支持包sudo apt-get install libboost-dev libboost-test-dev libboost-program-options-......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2017-05-26
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#http python" title="http python">http python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/04/02/restful概念/">
-        <h2 class="post-title">
-            restful概念
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            （摘自阮一峰的理解RESTful架构）
-一、 起源
-REST这个词，是由HTTP、URI等规范的主要设计者 Roy Thomas Fielding在他2000年的博士论文中提出的。到目前为止，关于REST最系统、最全面的论述，仍然是Fielding的博士论文。
-他论文中的写作目的：
-
-“本文研究计算机科学两大前沿—-软件和网络—-的交叉点。长期以来，软件研究主要关注软件设计的分类、设计方法的......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by if on
-            2017-04-02
+            2016-06-17
         </p>
         <div class="tags">
             
@@ -433,22 +378,25 @@ REST这个词，是由HTTP、URI等规范的主要设计者 Roy Thomas Fielding�
 
 <div class="post-preview">
 
-    <a href="/2017/03/27/docker小计/">
+    <a href="/2016/06/16/0616工作小计/">
         <h2 class="post-title">
-            docker小计
+            0617工作小计
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Docker EngineDocker Engine是Docker的大脑，docker指令是通过Engine运行，Engin的底层依赖Linux内核，也就是说Engin只能安装在Linux的各个发行版上，Mac OS 和 Windows 上无法直接运行Engine，需要借助一个装有lunux系统的虚拟机来。这个虚拟机被成之内Docker Machine(boot2dicker)
-Docker......
+            
+spring MVC 整合Shiro
+
+整合教程web.xml配置
+1234567891011121314151617&lt;!-- 配置Shiro过滤器,先让Shiro过滤系统接收到的请求 --&gt;    &lt;!-- 这里filter-name必须对应applicationContext.xml中定义的&lt;bean id="shiroFilter"/&gt; --&gt;  ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2017-03-27
+            2016-06-16
         </p>
         <div class="tags">
             
@@ -460,27 +408,27 @@ Docker......
 
 <div class="post-preview">
 
-    <a href="/2017/02/27/细数idea配置s2jh4net遇到的一些坑/">
+    <a href="/2015/09/27/java-sqlite备忘/">
         <h2 class="post-title">
-            细数idea配置s2jh4net遇到的一些坑
+            java-sqlite备忘
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            原文github地址(https://github.com/xautlx/s2jh4net)
-为啥要写这篇文档
-s2jh4net集结最新主流时尚开源技术的面向互联网Web应用的整合前端门户站点、HTML5移动站点及后端管理系统一体的的基础开发框架，提供一个J2EE相关主流开源技术架构整合及一些企业应用基础通用功能和组件的设计实现的最佳实践和原型参考。
-为啥要用idea
-因为默认是使用spri......
+            
+首先需要jar包（省略Spring）
+123456789101112&lt;dependency&gt;    &lt;groupId&gt;org.xerial&lt;/groupId&gt;    &lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;    &lt;version&gt;3.15.1&lt;/version&gt;&lt;/d......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2017-02-27
+            2015-09-27
         </p>
         <div class="tags">
+            
+              <a href="/tags/#sqlite" title="sqlite">sqlite</a>
             
         </div>
     
@@ -490,48 +438,25 @@ s2jh4net集结最新主流时尚开源技术的面向互联网Web应用的整合
 
 <div class="post-preview">
 
-    <a href="/2016/12/30/centos备忘/">
+    <a href="/2015/07/27/mysql远程登录/">
         <h2 class="post-title">
-            centos备忘
+            mysql远程登录
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            1.重启 apache　　service httpd restrat　　/etc/init.d/httpd stop　　/etc/init.d/httpd start　　2.重启 mysql　　service mysql restart　　/etc/init.d/mysqld stop　　/etc/init.d/mysqld start　　3.重启Nginx　　service nginx r......
+            闲来无事配置了一个ubuntu  ssh链接当服务器玩
+用apt-get 直接安装的mysql服务
+# apt-get install mysql-server-5.7
+会弹出来输入默认密码的窗口
+更改环境变量一般是/etc/mysql/my.cnf 文件下我的版本是5.7 /etc/mysql/conf.d/mysql.cnf  源代码bind-address = 127.0.0.1改为 ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by if on
-            2016-12-30
-        </p>
-        <div class="tags">
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/27/ubuntu16-04搭建node开发环境/">
-        <h2 class="post-title">
-            ubuntu16.04搭建node开发环境
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-通过 apt-get什么是apt-getAdvanced Package Tool，又名apt-get，是一款适用于Unix和Linux系统的应用程序管理器。最初于1998年发布，用于检索应用程序并将其加载到Debian Linux系统。Apt-get成名的原因之一在于其出色的解决软件依赖关系的能力。其通常使用.deb-formatted文件，但经过修改后可以使用apt-rpm处理红帽的P......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by if on
-            2016-12-27
+            2015-07-27
         </p>
         <div class="tags">
             
@@ -547,10 +472,10 @@ s2jh4net集结最新主流时尚开源技术的面向互联网Web应用的整合
 
 <ul class="pager">
     
-    
-        <li class="next">
-            <a href="/archives/2/">Older Posts &rarr;</a>
+        <li class="previous">
+            <a href="/">&larr; Newer Posts</a>
         </li>
+    
     
 </ul>
 

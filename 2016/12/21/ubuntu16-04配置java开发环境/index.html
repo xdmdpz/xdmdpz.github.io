@@ -16,11 +16,11 @@
     <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <title>
         
-          Tags - 一个奇怪的角落
+          ubuntu16.04配置java开发环境 - 一个奇怪的角落
         
     </title>
 
-    <link rel="canonical" href="http://www.xdmdpz.com/tags/">
+    <link rel="canonical" href="http://www.xdmdpz.com/2016/12/21/ubuntu16-04配置java开发环境/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,8 +71,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/tag-bg.png')
-            /*page*/
+            background-image: url('undefined')
+            /*post*/
         
     }
     
@@ -89,10 +89,16 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Tags</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Hey, this is Tags.</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>ubuntu16.04配置java开发环境</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by if on
+                            2016-12-21
+                        </span>
                     </div>
                 
 
@@ -209,71 +215,181 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
-                
-                    <a href="#sqlite" title="sqlite" rel="1">sqlite</a>
-                
-                    <a href="#http python" title="http python" rel="1">http python</a>
-                
-            </div>
+    <!-- Modify by Yu-Hsuan Yen -->
 
-            <!-- 标签列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="sqlite">
-                    <span class="tag-text">sqlite</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2015/09/27/java-sqlite备忘/">
-                        <h2 class="post-title">
-                            java-sqlite备忘
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="建立jdk存放路径"><a href="#建立jdk存放路径" class="headerlink" title="建立jdk存放路径"></a>建立jdk存放路径</h2><blockquote>
+<p><code># mkdir /usr/lib/jvm</code></p>
+</blockquote>
+<h2 id="解压jdk到指定目录"><a href="#解压jdk到指定目录" class="headerlink" title="解压jdk到指定目录"></a>解压jdk到指定目录</h2><blockquote>
+<p><code># tar -C /usr/lib/jvm -xzf jdk-7u55-linux-x64.tar.gz</code></p>
+</blockquote>
+<h2 id="打开配置文件"><a href="#打开配置文件" class="headerlink" title="打开配置文件"></a>打开配置文件</h2><blockquote>
+<p><code>#  vi /etc/profile</code></p>
+</blockquote>
+<h2 id="在profile最后一行插入"><a href="#在profile最后一行插入" class="headerlink" title="在profile最后一行插入"></a>在profile最后一行插入</h2><blockquote>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=<span class="regexp">/usr/lib</span><span class="regexp">/jvm/jdk</span>1.<span class="number">7.0_21</span>  </div><div class="line">export CLASSPATH=.:$JAVA_HOME/<span class="class"><span class="keyword">lib</span>:$<span class="title">JAVA_HOME</span>/<span class="title">jre</span>/<span class="title">lib</span>:$<span class="title">CLASSPATH</span>  </span></div><div class="line">export PATH=$JAVA_HOME/<span class="symbol">bin:</span>$JAVA_HOME/jre/<span class="symbol">bin:</span>$PATH</div></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="更新profile"><a href="#更新profile" class="headerlink" title="更新profile"></a>更新profile</h2><blockquote>
+<p><code># source /etc/profile</code></p>
+</blockquote>
+<hr>
+<h2 id="如果出现的还是默认的openjdk"><a href="#如果出现的还是默认的openjdk" class="headerlink" title="如果出现的还是默认的openjdk"></a>如果出现的还是默认的openjdk</h2><blockquote>
+<p><code># update-alternatives --   install /usr/lib/java java /usr/lib/jvm/jdk1.7.0_17/bin/java 300</code><br>    <code>#update-alternatives --install /usr/lib/javac javac /usr/lib/jvm/jdk1.7.0_17/bin/javac 300</code><br><code># update-alternatives --config java</code><br>  其中被星号标注的为默认JDK。如果要维持当前默认JDK，直接按回车键即可；否则输入相应JDK的编号将其设置为默认版本</p>
+</blockquote>
+<p>如果机器上安装了多个版本的jdk，那么还需要进行进一步的配置。比如当你在命令行中输入</p>
+<h1 id="java-version"><a href="#java-version" class="headerlink" title="java  -version"></a>java  -version</h1><p>这条命令显示的不是你想要的jdk版本信息，那么执行下面的命令,(下面红色部分表示，你希望的那个jdk版本安装目录)：</p>
+<h1 id="su-root"><a href="#su-root" class="headerlink" title="su  -    root"></a>su  -    root</h1><h1 id="export-JAVA-HOME-usr-java-jdk-1-6"><a href="#export-JAVA-HOME-usr-java-jdk-1-6" class="headerlink" title="export  JAVA_HOME=/usr/java/jdk_1.6"></a>export  JAVA_HOME=/usr/java/jdk_1.6</h1><h1 id="update-alternatives-–install-usr-bin-java-java-JAVA-HOME-bin-java-300"><a href="#update-alternatives-–install-usr-bin-java-java-JAVA-HOME-bin-java-300" class="headerlink" title="update-alternatives –install /usr/bin/java  java  $JAVA_HOME/bin/java  300"></a>update-alternatives –install /usr/bin/java  java  $JAVA_HOME/bin/java  300</h1><h1 id="update-alternatives-–install-usr-bin-javac-javac-JAVA-HOME-bin-javac-300"><a href="#update-alternatives-–install-usr-bin-javac-javac-JAVA-HOME-bin-javac-300" class="headerlink" title="update-alternatives –install /usr/bin/javac  javac $JAVA_HOME/bin/javac 300"></a>update-alternatives –install /usr/bin/javac  javac $JAVA_HOME/bin/javac 300</h1><p>然后对执行下面的两条命令，选择你希望的jdk版本。</p>
+<h1 id="update-alternatives-–config-java"><a href="#update-alternatives-–config-java" class="headerlink" title="update-alternatives –config  java"></a>update-alternatives –config  java</h1><h1 id="update-alternatives-–config-javac"><a href="#update-alternatives-–config-javac" class="headerlink" title="update-alternatives –config  javac"></a>update-alternatives –config  javac</h1><p>接着在命令行中执行</p>
+<h1 id="java-version-1"><a href="#java-version-1" class="headerlink" title="java  -version"></a>java  -version</h1>
+
+
                 <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/12/27/ubuntu16-04搭建node开发环境/" data-toggle="tooltip" data-placement="top" title="ubuntu16.04搭建node开发环境">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/07/21/spring整合Quartz/" data-toggle="tooltip" data-placement="top" title="spring整合Quartz">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
                 
+                <!-- 多说 Share end-->
+
+                <!-- gitment start -->
+                
+                    <div id="container"></div>
+                
+                  <!-- gitment end -->
+
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
             </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="http python">
-                    <span class="tag-text">http python</span>
-                </span>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/05/26/利用pyhton实现局域网传文件/">
-                        <h2 class="post-title">
-                            利用pyhton实现局域网传文件
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
                 <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                </ul>
                 
             </div>
-            
-
-
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- gitment start -->
+
+  <script type="text/javascript">
+  var gitment = new Gitment({
+    owner: 'xdmdpz',
+    repo: 'xdmdpz.github.io',
+    oauth: {
+      client_id: '2b847757e8c54f76a766',
+      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6'
+    }
+  })
+  gitment.render('container')
+  </script>
+
+  <!-- gitment end -->
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

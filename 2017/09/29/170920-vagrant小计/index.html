@@ -16,11 +16,11 @@
     <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <title>
         
-          Tags - 一个奇怪的角落
+          vagrant  小计 - 一个奇怪的角落
         
     </title>
 
-    <link rel="canonical" href="http://www.xdmdpz.com/tags/">
+    <link rel="canonical" href="http://www.xdmdpz.com/2017/09/29/170920-vagrant小计/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,8 +71,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/tag-bg.png')
-            /*page*/
+            background-image: url('undefined')
+            /*post*/
         
     }
     
@@ -89,10 +89,16 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Tags</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Hey, this is Tags.</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>vagrant  小计</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by if on
+                            2017-09-29
+                        </span>
                     </div>
                 
 
@@ -209,71 +215,197 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
-                
-                    <a href="#sqlite" title="sqlite" rel="1">sqlite</a>
-                
-                    <a href="#http python" title="http python" rel="1">http python</a>
-                
-            </div>
+    <!-- Modify by Yu-Hsuan Yen -->
 
-            <!-- 标签列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="sqlite">
-                    <span class="tag-text">sqlite</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2015/09/27/java-sqlite备忘/">
-                        <h2 class="post-title">
-                            java-sqlite备忘
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p> <strong>Vagrant</strong>并不提供虚拟化技术，本质上是一个虚拟机外挂，通过虚拟机的管理接口来管理虚拟机，让用户更轻松的进行一些常用配置，比如：<strong>CPU</strong>/<strong>Memory</strong>/<strong>IP</strong>/<strong>DISK</strong>等分配。并且提供了一些其它的管理操作：比如开机运行指定命令，镜像二次打包，插件编写等等。</p>
+<p>  <strong>Vagrant</strong>更适合用于开发环境，统一团队间的开发环境。</p>
+<p>  下面快速体验一下vagrant</p>
+<ol>
+<li><p><a href="https://www.vagrantup.com/downloads.html" target="_blank" rel="external">下载地址</a></p>
+</li>
+<li><p><code>vagrant -v</code> 查看一下版本 目前最新版应该是2.0.0</p>
+</li>
+<li><p><code>vagrant box add ubuntu/xenial64</code> 加载ubuntu镜像 更多集成好的box请访问<a href="https://app.vagrantup.com/boxes/search" target="_blank" rel="external">HashiCorp’s Atlas box catalog</a></p>
+</li>
+<li><p><code>mkdir /vagrant-demo-ubuntu &amp;&amp; cd /vagrant-demo-ubuntu</code> 新建并进入目录</p>
+</li>
+<li><p><code>vagrant init ubuntu/xenial64</code> 初始化ubuntu</p>
+</li>
+<li><p><code>vagrant up</code> 开机  一切就绪，启动虚拟环境</p>
+</li>
+<li><p><code>vagrant ssh</code> ssh连接</p>
+<blockquote>
+<p>也可以是用 ssh命令连接  账号密码都是vagrant</p>
+</blockquote>
+</li>
+<li><p><code>vagrant halt</code> 挂起，顾名思义，关闭当前虚拟环境</p>
+</li>
+<li><p><code>vagrant destroy</code> 彻底销毁当前虚拟环境</p>
+</li>
+<li><p><code>vagrant share</code> 需要一个<a href="https://atlas.hashicorp.com/" target="_blank" rel="external">HashiCorp’s Atlas</a>账户，vagrant login登录后，执行<code>vagrant share</code>，得到一个url，通过这个url可以访问到虚拟环境服务器</p>
+</li>
+<li><p><code>vagrant package</code> 打个包留着以后用</p>
+</li>
+</ol>
+<h1 id="vagrant使用三种网络配置"><a href="#vagrant使用三种网络配置" class="headerlink" title="vagrant使用三种网络配置"></a>vagrant使用三种网络配置</h1><h2 id="端口映射（Forwarded-port）"><a href="#端口映射（Forwarded-port）" class="headerlink" title="端口映射（Forwarded port）"></a>端口映射（Forwarded port）</h2><p>​    <strong>这种</strong>方式，就是把本机和虚拟机的端口进行映射。比如：我配置本机计算机的8080端口为虚拟机的80端口，这样我访问该机器的8080端口，vagrant会把请求转发到虚拟机的80端口是那个去处理。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">config.vm.network <span class="string">"forwarded_port"</span>, guest: 80, host: 8080</div></pre></td></tr></table></figure>
+<p>​    通过这种方式，我们可以有针对性的把虚拟机的某些端口公布到外网让其他人去访问。</p>
+<h2 id="私有网络（Private-network）"><a href="#私有网络（Private-network）" class="headerlink" title="私有网络（Private network）"></a>私有网络（Private network）</h2><p>​    既然是private，那么这种方式是只允许主机访问虚拟机。如果多个虚拟机设定在同一个网段，那么几个虚拟机之间也可以互相访问。这种方式，就好像是搭建了一个私有的linux集群。而且只有一个出口，那就是该主机。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">config.vm.network <span class="string">"private_network"</span>, ip: <span class="string">"192.168.21.4"</span></div></pre></td></tr></table></figure>
+<p>​    使用这种方式，非常安全，因为只有一个出口，但是你的虚拟机只允许你自己进行操作。团队成员不能操作，那你的电脑就成服务器主机了。</p>
+<h2 id="公有网络（Public-network）"><a href="#公有网络（Public-network）" class="headerlink" title="公有网络（Public network）"></a>公有网络（Public network）</h2><p>​    虚拟机享受实体机器一样的待遇，一样的网络配置，vagrant1.3版本之后也可以设定静态IP。设定语法如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">config.vm.network <span class="string">"public_network"</span>, ip: <span class="string">"192.168.1.120"</span></div></pre></td></tr></table></figure>
+<p>​    这种网络配置方式，方便团队开发，别人也可以访问你的虚拟机。当然，你和你的虚拟机必须在同一个网段中。</p>
+
+
+
                 <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/09/29/170929vagrant_java环境/" data-toggle="tooltip" data-placement="top" title="vagrant搭建的java环境">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/05/27/MAC上安装oracle/" data-toggle="tooltip" data-placement="top" title="MAC上安装oracle">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
                 
+                <!-- 多说 Share end-->
+
+                <!-- gitment start -->
+                
+                    <div id="container"></div>
+                
+                  <!-- gitment end -->
+
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
             </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="http python">
-                    <span class="tag-text">http python</span>
-                </span>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/05/26/利用pyhton实现局域网传文件/">
-                        <h2 class="post-title">
-                            利用pyhton实现局域网传文件
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
                 <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                </ul>
                 
             </div>
-            
-
-
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- gitment start -->
+
+  <script type="text/javascript">
+  var gitment = new Gitment({
+    owner: 'xdmdpz',
+    repo: 'xdmdpz.github.io',
+    oauth: {
+      client_id: '2b847757e8c54f76a766',
+      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6'
+    }
+  })
+  gitment.render('container')
+  </script>
+
+  <!-- gitment end -->
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

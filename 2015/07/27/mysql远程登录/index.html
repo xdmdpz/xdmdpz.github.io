@@ -16,11 +16,11 @@
     <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <title>
         
-          Tags - 一个奇怪的角落
+          mysql远程登录 - 一个奇怪的角落
         
     </title>
 
-    <link rel="canonical" href="http://www.xdmdpz.com/tags/">
+    <link rel="canonical" href="http://www.xdmdpz.com/2015/07/27/mysql远程登录/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,8 +71,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/tag-bg.png')
-            /*page*/
+            background-image: url('undefined')
+            /*post*/
         
     }
     
@@ -89,10 +89,16 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Tags</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Hey, this is Tags.</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>mysql远程登录</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by if on
+                            2015-07-27
+                        </span>
                     </div>
                 
 
@@ -209,71 +215,160 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
-                
-                    <a href="#sqlite" title="sqlite" rel="1">sqlite</a>
-                
-                    <a href="#http python" title="http python" rel="1">http python</a>
-                
-            </div>
+    <!-- Modify by Yu-Hsuan Yen -->
 
-            <!-- 标签列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="sqlite">
-                    <span class="tag-text">sqlite</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2015/09/27/java-sqlite备忘/">
-                        <h2 class="post-title">
-                            java-sqlite备忘
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="闲来无事配置了一个ubuntu-ssh链接当服务器玩"><a href="#闲来无事配置了一个ubuntu-ssh链接当服务器玩" class="headerlink" title="闲来无事配置了一个ubuntu  ssh链接当服务器玩"></a>闲来无事配置了一个ubuntu  ssh链接当服务器玩</h2><hr>
+<h3 id="用apt-get-直接安装的mysql服务"><a href="#用apt-get-直接安装的mysql服务" class="headerlink" title="用apt-get 直接安装的mysql服务"></a>用apt-get 直接安装的mysql服务</h3><blockquote>
+<p><code># apt-get install mysql-server-5.7</code></p>
+<p>会弹出来输入默认密码的窗口</p>
+<h3 id="更改环境变量"><a href="#更改环境变量" class="headerlink" title="更改环境变量"></a>更改环境变量</h3><p>一般是<code>/etc/mysql/my.cnf</code> 文件下<br>我的版本是5.7 <code>/etc/mysql/conf.d/mysql.cnf</code><br>  源代码<code>bind-address = 127.0.0.1</code><br>改为 <code>#bind-address = 127.0.0.1</code></p>
+</blockquote>
+<h2 id="也可以把Mysql-的user表复制一条用户然后host改成一个"><a href="#也可以把Mysql-的user表复制一条用户然后host改成一个" class="headerlink" title="也可以把Mysql 的user表复制一条用户然后host改成一个%"></a>也可以把Mysql 的user表复制一条用户然后host改成一个%</h2>
+
+
                 <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2015/09/27/java-sqlite备忘/" data-toggle="tooltip" data-placement="top" title="java-sqlite备忘">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
                 
+                <!-- 多说 Share end-->
+
+                <!-- gitment start -->
+                
+                    <div id="container"></div>
+                
+                  <!-- gitment end -->
+
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
             </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="http python">
-                    <span class="tag-text">http python</span>
-                </span>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/05/26/利用pyhton实现局域网传文件/">
-                        <h2 class="post-title">
-                            利用pyhton实现局域网传文件
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
                 <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                </ul>
                 
             </div>
-            
-
-
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- gitment start -->
+
+  <script type="text/javascript">
+  var gitment = new Gitment({
+    owner: 'xdmdpz',
+    repo: 'xdmdpz.github.io',
+    oauth: {
+      client_id: '2b847757e8c54f76a766',
+      client_secret: 'f984148be84a530961e3d9fe93f243aa2d3ecba6'
+    }
+  })
+  gitment.render('container')
+  </script>
+
+  <!-- gitment end -->
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
