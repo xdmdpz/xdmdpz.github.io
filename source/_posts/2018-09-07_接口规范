@@ -1,0 +1,22 @@
+---
+title: 自用接口规范（持续更新中）
+date: 2018-09-06 20:11:33
+tags:
+
+---
+
+
+
+- 版本号放在header里
+- 端口号后面+ “api” e.g： `https://localhost:8080/api`
+- PUT是设置（覆盖）、PATCH是合并（更新），按照实现方式去做定义
+- PUT、POST、PATCH 请求的ContentType为`application/json`
+- 资源采用名词命名，e.g：产品 -> product
+- 新增资源，e.g：新增产品 url -> /product, verb -> POST
+- 修改资源，e.g：修改产品 url -> /product/{id}, verb -> PATCH
+- 资源详情，e.g：指定产品详情 url -> /product/{id}, verb -> GET
+- 删除资源，e.g：删除产品 url -> /products/{ids}, verb -> DELETE  ids为逗号隔开的id
+- 资源列表，e.g：产品列表 url -> /products, verb -> GET
+- 资源关联关系，e.g：收藏产品 url -> /products/star?id={id}, verb -> PUT
+- 资源关联关系，e.g：删除收藏产品 url -> /products/star?id={id}, verb -> DELETE
+- url里资源后的{id} 为该资源的主键{id} e.g  `dataSource/{sid}/dataTable/{tid}/dataMetas` 即为获取指定数据源指定数据表下的所有数据项
