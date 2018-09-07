@@ -47,7 +47,11 @@ anchorjs: true                          # if you want to customize anchor. check
 # duoshuo_username: kaijun
 # Share component is depend on Comment so we can NOT use share only.
 #duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-
+gitment: true
+gitment_username: xdmdpz
+gitment_repo: xdmdpz.github.io
+gitment_client_id: 2b847757e8c54f76a766
+gitment_client_secret: f984148be84a530961e3d9fe93f243aa2d3ecba6
 
 # Analytics settings
 # Baidu Analytics
