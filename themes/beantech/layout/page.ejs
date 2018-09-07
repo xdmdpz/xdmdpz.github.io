@@ -109,11 +109,12 @@ layout: layout
                     <% } %>
                     <!-- Gitment评论插件通用代码 -->
                     <% if(config['gitment']) { %>
-                      
+
                       <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
                       <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
                       <script>
                       var gitment = new Gitment({
+                        id: '<%= page.date %>', // optional
                         owner: '<%= config['gitment_username'] %>',//github用户名
                         repo: '<%= config['gitment_repo'] %>',//用户存储评论的github项目名称
                         oauth: {

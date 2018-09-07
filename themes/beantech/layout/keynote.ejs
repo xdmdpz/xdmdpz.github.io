@@ -186,6 +186,7 @@ layout: layout
   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script>
   var gitment = new Gitment({
+    id: '<%= page.date %>', // optional
     owner: '<%= config['gitment_username'] %>',//github用户名
     repo: '<%= config['gitment_repo'] %>',//用户存储评论的github项目名称
     oauth: {
