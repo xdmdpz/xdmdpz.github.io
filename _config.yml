@@ -179,5 +179,5 @@ sitemap:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/YenYuHsuan/hexo-theme-beantech.git
+  repository: https://github.com/xdmdpz/xdmdpz.github.io.git
   branch: master
