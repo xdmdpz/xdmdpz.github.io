@@ -44,7 +44,7 @@ anchorjs: true                          # if you want to customize anchor. check
 #disqus_username: your-disqus-ID
 
 # Duoshuo settings 已故评论界网红，留着作纪念
-# duoshuo_username: kaijun
+# duoshuo_username: 
 # Share component is depend on Comment so we can NOT use share only.
 #duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 gitment: true
@@ -179,5 +179,5 @@ sitemap:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/xdmdpz/xdmdpz.github.io.git
+  repository: git@github.com:xdmdpz/xdmdpz.github.io.git
   branch: master

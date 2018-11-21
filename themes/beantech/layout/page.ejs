@@ -61,57 +61,17 @@ layout: layout
                 <!-- 如果开启评论功能 -->
                 <% if(page.comments) { %>
                     <hr>
-
-                    <% if(config['duoshuo_username']) { %>
-                    <!-- 多说评论框 start -->
-                    <div class="comment">
-                        <div class="ds-thread"
-                            data-thread-key="<%= page.path %>"
-                            data-title="<%= page.title %>"
-                            data-url="<%= page.permalink %>" >
-                        </div>
-                    </div>
-                    <!-- 多说评论框 end -->
-                    <% } %>
                     <!-- gitment start -->
                     <% if(config['gitment']) { %>
                           <div id="container"></div>
                     <% } %>
                       <!-- gitment end -->
-
-                    <% if(config['disqus_username']) { %>
-                    <!-- disqus 评论框 start -->
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                    <!-- disqus 评论框 end -->
-                    <% } %>
-
-
-                    <% if(config['gitment']) { %>
-                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        // dynamic User by Hux
-                        var _user = '<%= config['duoshuo_username'] %>';
-
-                        // duoshuo comment query.
-                        var duoshuoQuery = {short_name: _user };
-                        (function() {
-                            var ds = document.createElement('script');
-                            ds.type = 'text/javascript';ds.async = true;
-                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                            ds.charset = 'UTF-8';
-                            (document.getElementsByTagName('head')[0]
-                             || document.getElementsByTagName('body')[0]).appendChild(ds);
-                        })();
-                    </script>
-                    <!-- 多说公共JS代码 end -->
-                    <% } %>
+                   
                     <!-- Gitment评论插件通用代码 -->
                     <% if(config['gitment']) { %>
 
-                      <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-                      <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+                      <%- css('css/gitment.css')%>
+                      <%- js('js/gitment.js') %>
                       <script>
                       var gitment = new Gitment({
                         id: '<%= page.date %>', // optional

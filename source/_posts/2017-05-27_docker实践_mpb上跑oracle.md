@@ -65,10 +65,10 @@ subtitle: "docker实践，先应付过去考试再说"
 * 数据库默认设置
 
 		hostname: localhost
-		port: 49161
-		sid: xe
-		username: system
-		password: oracle
+	​	port: 49161
+	​	sid: xe
+	​	username: system
+	​	password: oracle
 * SYS和SYSTEM的密码
 
 		oracle
@@ -76,10 +76,10 @@ subtitle: "docker实践，先应付过去考试再说"
 * SSH连接docker服务器
 
 		ssh root@localhost -p 49160
-		password: admin
+	​	password: admin
 * 支持自定义数据初始化
 
 		# Dockerfile
 		FROM wnameless/oracle-xe-11g
-
+	
 		ADD init.sql /docker-entrypoint-initdb.d/
