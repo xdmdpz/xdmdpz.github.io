@@ -1,7 +1,7 @@
 ---
 title: CentOS-JAVA开发环境
 date: 2018-10-11 11:11:33
-tags: restful
+tags: java,linux
 header-img: "img/header_img/archive-bg.png"
 subtitle: "最近在用vagrant做一个hadoop的集群，把安装java之类的命令提出来了"
 ---

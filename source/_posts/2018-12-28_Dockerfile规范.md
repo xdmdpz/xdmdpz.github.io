@@ -1,3 +1,11 @@
+---
+title: Dockerfile规范
+date: 2018-12-28 14:50:40
+tags: docker,dockerfile
+header-img: "img/header_img/archive-bg.png"
+subtitle: "积累制作镜像过程中的一些推荐写法"
+---
+
 在 Debian 或者 Ubuntu 或者它们的衍生版本中会用到 apt 包管理器，如果需要在镜像中安装新包，推荐的写法是
 
 ```

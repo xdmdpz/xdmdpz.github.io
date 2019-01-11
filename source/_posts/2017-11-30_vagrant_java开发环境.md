@@ -1,7 +1,7 @@
 ---
 title: vagrant_java开发环境
 date: 2017-11-30 20:11:33
-tags: restful
+tags: vagrant java
 header-img: "img/header_img/archive-bg.png"
 subtitle: "自用vagrant镜像"
 ---
