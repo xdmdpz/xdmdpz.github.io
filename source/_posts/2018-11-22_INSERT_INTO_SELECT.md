@@ -2,7 +2,7 @@
 title: INSERT INTO SELECT
 date: 2018-11-22 13:40:40
 tags: SQL
-header-img: "img/header_img/archive-bg.png"
+header-img: "/img/if/IMG_2031.jpg"
 subtitle: "按照最近项目的开发习惯"
 ---
 

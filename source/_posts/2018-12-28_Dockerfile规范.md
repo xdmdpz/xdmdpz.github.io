@@ -2,7 +2,7 @@
 title: Dockerfile规范
 date: 2018-12-28 14:50:40
 tags: docker,dockerfile
-header-img: "img/header_img/archive-bg.png"
+header-img: "/img/if/DSC_7885.jpg"
 subtitle: "积累制作镜像过程中的一些推荐写法"
 ---
 

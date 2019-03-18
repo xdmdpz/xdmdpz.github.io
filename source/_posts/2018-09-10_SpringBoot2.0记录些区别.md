@@ -3,7 +3,7 @@
 title: Springboot2.0记录些区别
 date: 2018-09-10 16:22:44
 tags: java,springboot
-header-img: "img/header_img/archive-bg.png"
+header-img: "/img/if/111111.jpg"
 subtitle: "最近在搭架子，用了最新的Springboot2.0，发现好多方法都启用了"
 ---
 

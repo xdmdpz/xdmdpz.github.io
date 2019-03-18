@@ -2,7 +2,7 @@
 title: Timestamp与Datatime区别
 date: 2018-12-16 14:50:40
 tags: SQL
-header-img: "img/header_img/archive-bg.png"
+header-img: "/img/if/DSC01830.jpg"
 subtitle: "最近遇到了写时间的bug"
 ---
 

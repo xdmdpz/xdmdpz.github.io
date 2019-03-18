@@ -2,7 +2,7 @@
 title: 使用docker部署前后端分离项目
 date: 2019-01-02 13:40:40
 tags: docker 
-header-img: "img/header_img/archive-bg.png"
+header-img: "/img/if/IMG_1208.jpg"
 subtitle: "记录下思考过程"
 ---
 
