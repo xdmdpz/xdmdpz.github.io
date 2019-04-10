@@ -419,6 +419,8 @@ pre code {
   padding: 85px 0 55px;
   color: white;
 }
+
+.intro-header .site-heading {text-shadow: 2px 2px 0px #2f2f2f;}
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
   .intro-header .post-heading,
@@ -457,6 +459,8 @@ pre code {
   font-weight: 300;
   margin: 10px 0 0;
 }
+.intro-header .site-heading {text-shadow: 2px 2px 0px #2f2f2f;}
+.intro-header .post-heading {text-shadow: 2px 2px 0px #2f2f2f;}
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading h1,
   .intro-header .page-heading h1 {
