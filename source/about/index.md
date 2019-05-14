@@ -2,10 +2,78 @@
 layout: "about"
 title: "About"
 date: 2016-04-21 04:48:33
-description: "Wish for the Best, Prepare for the Worst"
+description: "考研ing 暂时不考虑工作"
 header-img: "img/header_img/Iron-Man-3.jpg"
 comments: true
 ---
 
-> 光有好奇心而不去實踐，等於自願放棄成功機會
-> 別為自己畫地自限，Just Do It！！
+![](http://xdmdpz.com/img/header_img/bg_1.jpg)
+
+----------- 简历 --------------
+---- LastUpdate 20190204 -----
+
+吉林长白山人 / 现居天津 / 1995.11 
+
+天津城建大学 / 软件工程 / 2018毕业 / 统招 / 全日制 
+
+手机号：MTg1MDIyNjI1NzU=
+
+邮箱：eGRtZHB6QGZveG1haWwuY29t
+
+github：github.com/xdmdpz
+
+Blog： xdmdpz.github.io
+
+我对自己的定位: 主攻后端,同时在其他方面也偶尔打打辅助。
+
+## 工作经验
+
+#### 天津泰凡科技有限公司（2018.6~2019.6）
+- 大数据研发部 / 研发 
+    - 主要负责数据可视化服务端研发
+    - 参与大数据分析平台服务端研发
+    - 搭建公司基础设施 如 wiki、ldap、jenkins、nexus
+    - 开发环境以及生产环境部署方案
+    - 设计项目持续集成与发布方案
+- 产品融合事业部 / 研发 / 项目负责人 
+    - 负责环境气象预报预警系统整体架构设计、调研、研发
+    - 气象需求设计、调研 如 WebGis、MICAPS、netCDF、数据爬取
+- 经验总结：
+    - 掌握了大数据相关知识、气象相关知识、爬虫
+    - 熟悉基本项目管理、敏捷开发
+    - 从头搭建了一套持续集成，对项目整体的生命周期有了更深的认识
+    - 实现了公司80%的docker定制需求、造了一些加速项目开发的轮子
+
+#### Java研发工程师：小米互娱-游戏发行部（2017.7~2018.6）
+- 参与unity开发者站研发
+- 负责小米互娱传包管理系统的研发
+- 经验总结：
+  - 在小米工作期间，第一次接触互联网开发与传统软件开发的差异性，逐渐适应互联网开发的节奏。
+  - 每一次的版本更新，都让我学习到很多新的知识，但更多的是 与同事之间的相互交流，丰富了我的工作经验。
+
+#### Java研发工程师：联合华通（天津）科技有限公司-产品研发部（2016.6-2017.7）
+- 全程参与一卡通整个平台的设计与实现
+- 主要负责公交卡相关（CPU、M1）
+- 负责电子现金、电子钱包充值消费
+- 后因学校等原因离职
+- 经验总结：
+  - 因为入职时公司才成立2个月，所以很纵向的体验了一次创业公司的开发，同时并行参与了好多不同种类项目，深刻的体会到了代码规范的重要性。
+
+
+
+## 技术栈
+
+- 熟练掌握Java基本知识，具备良好的面像对象编程思想，并且熟悉常用的Java设计模式
+- 了解Lambda表达式与函数式接口，了解Stream等，反射等特性
+- 掌握java开源框架，Spring，spring boot ，spring cloud，Spring mvc ，mybatis，hibernate，SpringDataJPA等能够模拟编写上述框架的核心功能。
+- 熟练运用 docker技术，能够熟练编写部署脚本，Dockerfie优化
+- 熟练掌握ansible、vagrant、docker-compose可以快速的编排一套环境 
+- 了解vue、掌握es6,可以编写mvvm模式的前端代码
+- 熟练掌握多种开源企业级开发平台，有多次整合经验，根据自己代码习惯和模板，写了一个代码生成器，可以快速搭建Restful服务
+  - 仓库地址`https://github.com/xdmdpz/RestQuickFramework`
+- 平常工作在mac与ubuntu系统，熟练掌握shell 命令，部署脚本的编写，黑苹果爱好者
+- 熟悉ios打包流程，在不操作gui的情况下 给ios(xcarchive)签名
+- 熟练掌握svn、git，使用 markdown编写接口文档
+- 熟练掌握maven构建程序，制作docker镜像，编写docker-compose
+- 摄影爱好者，掌握基本ps、axure
+
