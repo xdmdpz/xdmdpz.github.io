@@ -2,7 +2,7 @@
 layout: "about"
 title: "About"
 date: 2016-04-21 04:48:33
-description: "考研ing 暂时不考虑工作"
+description: "找工作中，欢迎联系"
 header-img: "img/if/光绘水晶球.jpg"
 comments: true
 ---
