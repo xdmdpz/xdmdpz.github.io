@@ -87,6 +87,10 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 ## Friends
 friends: [
     {
+        title: "快乐晓明",
+        href: "https://xuanxiaoming.info/"
+    },
+    {
         title: "Sally",
         href: "http://www.sally.ren/"
     },
