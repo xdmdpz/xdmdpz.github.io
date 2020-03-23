@@ -10,17 +10,15 @@ comments: true
 ![](http://xdmdpz.com/img/header_img/bg_1.jpg)
 
 ------------- 简历 -----------------
----- LastUpdate 20200312 -----
+---- LastUpdate 20200323 -----
 
-##### 孙翊夫 | 吉林长白山人 |  1995.11
+吉林长白山人 |  1995.11
 
-##### 天津城建大学 | 软件工程 | 2018毕业 | 统招 | 全日制 
+天津城建大学 | 软件工程 | 2018毕业 | 统招 | 全日制 
 
-##### 18502262575 | xdmdpz@foxmail.com
+手机号：MTg1MDIyNjI1NzU=
 
-##### Github：github.com/xdmdpz
-
-##### 博客:  xdmdpz.github.io
+邮箱：eGRtZHB6QGZveG1haWwuY29t
 
 ---
 
