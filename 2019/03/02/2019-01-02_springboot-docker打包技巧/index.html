@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一个写代码的胖子，一个不称职的摄影师">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          使用docker部署前后端分离项目 - xdmdpz | if
+        
+    </title>
+
+    <link rel="canonical" href="http://xdmdpz.github.io/2019/03/02/2019-01-02_springboot-docker打包技巧/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/if/IMG_1208.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#docker" title="docker">docker</a>
+                            
+                        </div>
+                        <h1>使用docker部署前后端分离项目</h1>
+                        <h2 class="subheading">记录下思考过程</h2>
+                        <span class="meta">
+                            Posted by if on
+                            2019-03-02
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>最近项目快来发完了，就寻思弄一套部署方法</p>
+<p>技术栈是这样的</p>
+<ul>
+<li>服务端 spring-boot</li>
+<li>前端 vue+webpack</li>
+<li>数据库 mysql</li>
+<li>图片服务器 zimg</li>
+</ul>
+<p>然后准备用docker部署、数据库用阿里云的</p>
+<h3><span id="服务端方案">服务端方案</span></h3>
+<p>后端用的<code>alpine-glibc:glibc-2.27</code>+<code>openjdk</code>做基础镜像</p>
+<p><strong>基础镜像Dockerfile</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> frolvlad/alpine-glibc:glibc-<span class="number">2.27</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> maintainer=<span class="string">"xdmdpz &lt;xdmdpz@gmail.com&gt;"</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">ENV JDK_PACKAGE_NAME zulu8.31.0.1-jdk8.0.181-linux_x64.tar.gz</span></span><br><span class="line"><span class="bash">ENV JAVA_VERSION 8</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">ENV JAVA_PATH 512cd62ec5174c3487ac17c61aaa89e8</span></span><br><span class="line"><span class="bash">ENV JAVA_HOME /usr/<span class="built_in">local</span>/jvm/default-jvm</span></span><br><span class="line"><span class="bash">ENV JAVA_DOWNLOAD_URL https://cdn.azul.com/zulu/bin/<span class="variable">$&#123;JDK_PACKAGE_NAME&#125;</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN apk add --no-cache bash tar wget ca-certificates unzip \</span></span><br><span class="line"><span class="bash">    &amp;&amp; mkdir -p <span class="variable">$&#123;JAVA_HOME&#125;</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; wget  <span class="variable">$&#123;JAVA_DOWNLOAD_URL&#125;</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; tar -xzf <span class="variable">$&#123;JDK_PACKAGE_NAME&#125;</span> -C <span class="variable">$&#123;JAVA_HOME&#125;</span> --strip-components=1 \</span></span><br><span class="line"><span class="bash">    &amp;&amp; ln -s <span class="variable">$&#123;JAVA_HOME&#125;</span>/bin/* /usr/bin/ \</span></span><br><span class="line"><span class="bash">    &amp;&amp; apk del tar wget ca-certificates unzip \</span></span><br><span class="line"><span class="bash">    &amp;&amp; rm -rf   <span class="variable">$&#123;JDK_PACKAGE_NAME&#125;</span> \</span></span><br><span class="line"><span class="bash">                <span class="variable">$&#123;JAVA_HOME&#125;</span>/*src.zip \</span></span><br><span class="line"><span class="bash">                <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security/README.txt \</span></span><br><span class="line"><span class="bash">                /tmp/*</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">CMD [<span class="string">"bash"</span>]</span></span><br></pre></td></tr></table></figure>
+<p>接着在基础镜像基础上加入项目jar包，并加入启动命令<br>
+<strong>服务端Dockerfile</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> alpine-glibc-openjdk-<span class="number">8</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> /tmp</span></span><br><span class="line"><span class="bash">ADD app.jar app.jar</span></span><br><span class="line"><span class="bash">ENV 8080</span></span><br><span class="line"><span class="bash">ENTRYPOINT [<span class="string">"java"</span>,<span class="string">"-Djava.security.egd=file:/dev/./urandom"</span>,<span class="string">"-Dspring.profiles.active=<span class="variable">$&#123;SPRING_PROFILES_ACTIVE&#125;</span>"</span>,<span class="string">"-Duser.timezone=GMT+08"</span>,<span class="string">"-jar"</span>,<span class="string">"/app.jar"</span>]</span></span><br></pre></td></tr></table></figure>
+<h3><span id="前端方案">前端方案</span></h3>
+<ol>
+<li>
+<p>开发时前端打包后，将编译后的项目用nginx启动。</p>
+<p>目录结构</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">├── dist/</span><br><span class="line">├── nginx.conf</span><br><span class="line">└── Dockerfile</span><br></pre></td></tr></table></figure>
+<p>Dockerfile</p>
+ <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx</span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> nginx.conf /etc/nginx/nginx.conf</span></span><br><span class="line"><span class="bash">RUN mkdir /app</span></span><br><span class="line"><span class="bash">WORKDIR /app</span></span><br><span class="line"><span class="bash">COPY . /app/</span></span><br><span class="line"><span class="bash">ENV PORT 80</span></span><br><span class="line"><span class="bash">RUN mkdir -p /var/www/html/dist \</span></span><br><span class="line"><span class="bash">&amp;&amp;  cp -r dist/* /var/www/html/dist \</span></span><br><span class="line"><span class="bash">&amp;&amp; rm -rf /app</span></span><br><span class="line"><span class="bash">RUN <span class="built_in">echo</span> <span class="string">"Asia/shanghai"</span> &gt; /etc/timezone</span></span><br></pre></td></tr></table></figure>
+<p>获取nginx.conf的方法</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run --name tmp-nginx-container -d nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker cp tmp-nginx-container:/etc/nginx/nginx.conf ./nginx.conf </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker rm -f tmp-nginx-container</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>后来觉得直接让前端打包成镜像就算了，写了一个在容器打包的方案</p>
+<p>Dockerfile</p>
+ <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">10.14</span>.<span class="number">2</span>-slim</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update  &amp;&amp; apt-get install -y nginx</span></span><br><span class="line"><span class="bash">COPY nginx.conf /etc/nginx/nginx.conf</span></span><br><span class="line"><span class="bash">RUN mkdir /app</span></span><br><span class="line"><span class="bash">WORKDIR /app</span></span><br><span class="line"><span class="bash">COPY . /app/</span></span><br><span class="line"><span class="bash">ENV PORT 80RUN mkdir /var/www/html/dist \</span></span><br><span class="line"><span class="bash">    &amp;&amp; npm install \</span></span><br><span class="line"><span class="bash">    &amp;&amp; npm run build \</span></span><br><span class="line"><span class="bash">    &amp;&amp; cp -r dist/* /var/www/html/dist \</span></span><br><span class="line"><span class="bash">    &amp;&amp; cp -r index.html /var/www/html \</span></span><br><span class="line"><span class="bash">    &amp;&amp; rm -rf /app</span></span><br><span class="line"><span class="bash">RUN <span class="built_in">echo</span> <span class="string">"Asia/shanghai"</span> &gt; /etc/timezoneCMD [<span class="string">"nginx"</span>,<span class="string">"-g"</span>,<span class="string">"daemon off;"</span>]</span></span><br></pre></td></tr></table></figure>
+<p>获取nginx.conf方法与上一个一样</p>
+</li>
+</ol>
+<hr>
+<p>后来觉得根据spring-boot的启动方式</p>
+<p>前后端完全可以部署在一起，这样也省的每次前端打包都要改ip了</p>
+<p>然后在查资料的过程中发现了一个Docker在构建项目上的一个特性</p>
+<blockquote>
+<p>指定按照从上到下，顺序执行</p>
+</blockquote>
+<blockquote>
+<p>每条指令都会创建一个新的镜像层，并对镜像进行提交</p>
+</blockquote>
+<blockquote>
+<p>如果某个命令相关的内容没有变化，会使用上一次缓存（cache）的文件层</p>
+</blockquote>
+<p>这个思路完全可行</p>
+<p>下面演示下例子：</p>
+<p>思路:</p>
+<ol>
+<li>
+<p>使用jenkins检测指定分支代码更新</p>
+</li>
+<li>
+<p>使用打包工具打包并用时间戳命名（.jar、.zip）</p>
+</li>
+<li>
+<p>创建软连接后端代码 (LTS.jar) or 前端代码(LTS.zip)并解压</p>
+<ul>
+<li><code>ln -s -f 1547196831460.jar /LTS/LTS.jar</code></li>
+<li><code>ln -s -f 1547196831460.zip /LTS/LTS.zip</code></li>
+</ul>
+</li>
+<li>
+<p>构建image</p>
+<ul>
+<li>解压前后端项目
+<ul>
+<li><code>rm -rf /LTS/java &amp;&amp; unzip LTS.jar -d java</code></li>
+<li><code>rm -rf /LTS/vue &amp;&amp; unzip LTS.zip -d vue</code></li>
+</ul>
+</li>
+<li>Dockerfile</li>
+</ul>
+ <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> alpine-glibc-openjdk-<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> maintainer <span class="string">"xdmdpz@foxmail.com"</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">COPY /LTS/java/BOOT-INF/lib/ /app/BOOT-INF/lib/</span></span><br><span class="line"><span class="bash">COPY /LTS/java/org /app/org</span></span><br><span class="line"><span class="bash">COPY /LTS/java/META-INF /app/META-INF</span></span><br><span class="line"><span class="bash">COPY /LTS/java/BOOT-INF/classes /app/BOOT-INF/classes</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">COPY /LTS/vue/* /app/BOOT-INF/classes</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">EXPOSE 8080</span></span><br><span class="line"><span class="bash">CMD [<span class="string">"/usr/bin/java"</span>, <span class="string">"-cp"</span>, <span class="string">"/app"</span>, <span class="string">"org.springframework.boot.loader.JarLauncher"</span>]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>完事</p>
+</li>
+</ol>
+<p>Dockerfile我们把应用的内容分成5个部分COPY到镜像里面：</p>
+<p>其中前面3个基本不变，</p>
+<p>第4个是经常变化的后端代码，</p>
+<p>第5个是打包后的前端代码。</p>
+<p>最后一行是解压缩后，启动spring boot应用的方式。</p>
+<p>这样在构建镜像时候可大大提高构建速度。</p>
+<p>部署的时候注意一下两点：</p>
+<ul>
+<li>不变或者变化很少的体积较大的依赖库和经常修改的自有代码分开</li>
+<li>因为cache缓存在运行Docker build命令的本地机器上，建议固定使用某台机器来进行Docker build，以便利用cache。</li>
+</ul>
+<p>以上是构建Spring Boot应用镜像，其他类型的应用，比如Java WAR包，Nodejs的npm模块等，可以采取类似的方式。</p>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/09/09/2019-09-09_MAC软件提示已损坏的解决方法 copy/" data-toggle="tooltip" data-placement="top" title="MAC【10.15】软件提示已损坏，需要移到废纸篓的解决方法">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/02/12/2018-09-07_接口规范/" data-toggle="tooltip" data-placement="top" title="自用接口规范（持续更新中）">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+                <!-- gitment start -->
+                
+                      <div id="container"></div>
+                
+                  <!-- gitment end -->
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#docker" title="docker">docker</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://xuanxiaoming.info/" target="_blank">快乐晓明</a></li>
+                    
+                        <li><a href="http://www.sally.ren/" target="_blank">Sally</a></li>
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                        <li><a href="http://henglublog.com/" target="_blank">HengLu</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Gitment评论插件通用代码 -->
+
+
+    <link rel="stylesheet" href="/css/gitment.css">
+    <script src="/js/gitment.js"></script>
+    
+  <script>
+    var gitment = new Gitment({
+    id: 'Sat Mar 02 2019 13:40:40 GMT+0800', // optional
+    owner: 'xdmdpz',//github用户名
+    repo: 'xdmdpz.github.io',//用户存储评论的github项目名称
+    oauth: {
+      client_id: '2b847757e8c54f76a766',//注册OAuth Application时生产的ClinetID
+      client_secret:'f984148be84a530961e3d9fe93f243aa2d3ecba6',//注册OAuth Application时生成的Client Secret
+    },
+  })
+  gitment.render('container')
+  </script>
+
+
+<!-- Gitment代码结束 -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; if 2021
+                    <br>
+                    <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">津ICP备18000206号-1</a>
+                    <br>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xdmdpz&repo=xdmdpz.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xdmdpz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://xdmdpz.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

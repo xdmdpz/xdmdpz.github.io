@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一个写代码的胖子，一个不称职的摄影师">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          使用nvm安装指定版本的node - xdmdpz | if
+        
+    </title>
+
+    <link rel="canonical" href="http://xdmdpz.github.io/2016/12/27/2016-12-27_使用nvm安装指定版本的node/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/if/IMG_0348.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#ubuntu,nvm,nodeJs" title="ubuntu,nvm,nodeJs">ubuntu,nvm,nodeJs</a>
+                            
+                        </div>
+                        <h1>使用nvm安装指定版本的node</h1>
+                        <h2 class="subheading">安装备忘，按道理会经常用到</h2>
+                        <span class="meta">
+                            Posted by if on
+                            2016-12-27
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <ul>
+<li>
+<h2><span id="通过-apt-get">通过 apt-get</span></h2>
+<h3><span id="什么是apt-get">什么是apt-get</span></h3>
+<pre><code>  Advanced Package Tool，又名apt-get，是一款适用于Unix和Linux系统的应用程序管理器。最初于1998年发布，用于检索应用程序并将其加载到Debian Linux系统。Apt-get成名的原因之一在于其出色的解决软件依赖关系的能力。其通常使用.deb-formatted文件，但经过修改后可以使用apt-rpm处理红帽的Package Manager（RPM）文件。
+</code></pre>
+<p>每个系统都有适合自己的包管理工具，如debian系的<code>apt-get</code>,Fedora和RedHat系的<code>yum</code>，macOS的<code>homebrow</code></p>
+<p>以前经常用ubuntu的安装包管理器<code>apt-get</code>安装nodeJs和npm  如果只使用node的基本功能可以直接使用如下命令</p>
+<pre><code>  `$ sudo apt-get install nodejs`
+  `$ sudo apt-get install npm`
+</code></pre>
+<p>因为使用 apt-get 安装的 node 的包管理工具 npm 并没有初始安装，所以需要安装 npm</p>
+</li>
+<li>
+<h2><span id="通过-nvm">通过 nvm</span></h2>
+<h3><span id="什么是nvm">什么是nvm</span></h3>
+<pre><code>  nvm是一个开源的 Node 版本管理器，通过简单的 bash 脚本来管理、切换多个 Node.js版本,使用nvm可以安装官网最新版本之前的任意版本,可以任意切换不同版本
+</code></pre>
+<p>安装 nvm 通过curl</p>
+<pre><code>  $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash  
+</code></pre>
+<p>安装nvm 通过wget</p>
+<pre><code>  $ wget -O- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash  
+</code></pre>
+<p>重启控制台，查看nvm版本</p>
+<pre><code>  $ nvm -v
+</code></pre>
+<p>如果命令无效，去<code>~/.bashrc</code>里面完善<code>nvm</code>环境变量</p>
+<pre><code>  export NVM_DIR=&quot;/Users/YOURUSERNAME/.nvm&quot;  
+  [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm  
+</code></pre>
+<h3><span id="查看可用的node版本">查看可用的node版本</span></h3>
+<pre><code>  $ nvm ls-remote  
+</code></pre>
+<h3><span id="安装指定版本node我安装的是6103">安装指定版本node，我安装的是6.10.3</span></h3>
+<pre><code>  $ nvm install v6.10.3
+</code></pre>
+<h3><span id="查看系统里安装的nodejs版本">查看系统里安装的nodejs版本</span></h3>
+<pre><code>  $ nvm list
+</code></pre>
+<h3><span id="选择指定版本nodejs">选择指定版本nodejs</span></h3>
+<pre><code>  $  nvm use v6.10.3
+</code></pre>
+<p>再次<code>nvm list</code>后会看到一个标记使用的文字提醒</p>
+<h3><span id="选择默认版本">选择默认版本</span></h3>
+<pre><code>   $ nvm alias default v6.10.3
+</code></pre>
+<p>卸载某个 node 版本,例如卸载 v4.4.5 版本<br>
+​     $ nvm uninstall v4.4.5</p>
+</li>
+<li>
+<h2><span id="两个版本差异">两个版本差异</span></h2>
+<h4><span id="apt-get">apt-get</span></h4>
+<pre><code>  不是最新版本（在linux下默认源中没有 node 的程序），安装的版本有且只有一个，而且执行sudo命令的时候，是以超级管理员身份运行，以后你用npm如果是以超级管理员权限执行的，所以别人就可以更改系统文件，会造成安全性问题，假如别人上传了一个不太好的npm包，里面的脚本实际上是删除系统文件，让你装一下，说帮他测试一下，你install完，sudo一执行。他就可以改系统文件了，那就完蛋了...但前提是你使用了sudo
+</code></pre>
+<h4><span id="nvm">nvm</span></h4>
+<pre><code>  可以供我们选择要安装的版本，并且则解决了多版本共存、切换问题，但在安装之前，请确认本机以前的安装包已经被卸载
+</code></pre>
+</li>
+<li>
+<h2><span id="安装目录-终端通过-whereis-node-查看">安装目录 （终端通过 whereis node 查看）</span></h2>
+<h4><span id="apt-get">apt-get</span></h4>
+<pre><code>  /usr/local/bin/node
+</code></pre>
+<h4><span id="nvm">nvm</span></h4>
+<pre><code>  /home/__用户__/.nvm/versions/node/v6.10.3/bin/node
+</code></pre>
+</li>
+<li>
+<h2><span id="淘宝npm扩展">淘宝NPM扩展</span></h2>
+<p>直接用npm全局安装</p>
+<pre><code>  npm install -g cnpm --registry=https://registry.npm.taobao.org  
+</code></pre>
+</li>
+<li>
+<p>##node相关操作</p>
+<p>查看node版本</p>
+<pre><code>  `$ node --version`
+</code></pre>
+<p>查看npm版本</p>
+<pre><code>  `$ npm  --version`
+</code></pre>
+<p>进入 node 环境</p>
+<pre><code>  $  node
+  或
+  $ nodejs
+  出现&gt; 符号则进入成功
+</code></pre>
+<p>运行js文件</p>
+<pre><code>  $ nodejs hello.js
+  或
+  $ node hello.js
+</code></pre>
+</li>
+</ul>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/05/21/2018-05-21_RestFul接口设计/" data-toggle="tooltip" data-placement="top" title="RestFul接口设计">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/09/07/2016-09-07_CPU卡流程备忘/" data-toggle="tooltip" data-placement="top" title="CPU卡流程备忘">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+                <!-- gitment start -->
+                
+                      <div id="container"></div>
+                
+                  <!-- gitment end -->
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ubuntu,nvm,nodeJs" title="ubuntu,nvm,nodeJs">ubuntu,nvm,nodeJs</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://xuanxiaoming.info/" target="_blank">快乐晓明</a></li>
+                    
+                        <li><a href="http://www.sally.ren/" target="_blank">Sally</a></li>
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                        <li><a href="http://henglublog.com/" target="_blank">HengLu</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Gitment评论插件通用代码 -->
+
+
+    <link rel="stylesheet" href="/css/gitment.css">
+    <script src="/js/gitment.js"></script>
+    
+  <script>
+    var gitment = new Gitment({
+    id: 'Tue Dec 27 2016 20:11:33 GMT+0800', // optional
+    owner: 'xdmdpz',//github用户名
+    repo: 'xdmdpz.github.io',//用户存储评论的github项目名称
+    oauth: {
+      client_id: '2b847757e8c54f76a766',//注册OAuth Application时生产的ClinetID
+      client_secret:'f984148be84a530961e3d9fe93f243aa2d3ecba6',//注册OAuth Application时生成的Client Secret
+    },
+  })
+  gitment.render('container')
+  </script>
+
+
+<!-- Gitment代码结束 -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; if 2021
+                    <br>
+                    <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">津ICP备18000206号-1</a>
+                    <br>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xdmdpz&repo=xdmdpz.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xdmdpz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://xdmdpz.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

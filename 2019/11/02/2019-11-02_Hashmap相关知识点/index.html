@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一个写代码的胖子，一个不称职的摄影师">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Hashmap相关知识点 - xdmdpz | if
+        
+    </title>
+
+    <link rel="canonical" href="http://xdmdpz.github.io/2019/11/02/2019-11-02_Hashmap相关知识点/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/if/IMG_1208.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#面试" title="面试">面试</a>
+                            
+                        </div>
+                        <h1>Hashmap相关知识点</h1>
+                        <h2 class="subheading">记录一下</h2>
+                        <span class="meta">
+                            Posted by if on
+                            2019-11-02
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>整理下收集来的资料</p>
+<h3><span id="什么是map">什么是Map</span></h3>
+<ul>
+<li>Map就是用于存储键值对（&lt;key,value&gt;）的集合类</li>
+<li>map没有重复的 key</li>
+<li>每个 key 只能对应一个 value, 多个 key 可以对应一个 value</li>
+<li>传入key值相同的键值对，将作为覆盖处理</li>
+</ul>
+<h3><span id="什么哈希hash">什么哈希（Hash）</span></h3>
+<ul>
+<li>Hash把任意长度的输入，通过哈希函数，变换成固定长度的输出</li>
+<li>数据的值叫做预映射</li>
+<li>哈希函数是散列算法的一种实现（例如HashCode()）</li>
+<li>输出的值就是HashCode</li>
+<li>这个计算过程就叫做Hash/哈希/散列</li>
+</ul>
+<h3><span id="什么是hashmap">什么是HashMap</span></h3>
+<ul>
+<li>
+<p>HashMap是用哈希表（数组加单链表）+红黑树（1.8加入）实现的Map</p>
+<p>继承AbstractMap，实现了Map，Serializable且线程不安全的Map</p>
+</li>
+<li>
+<p>通过拉链法来解决哈希冲突，将发生碰撞的节点连接成一条单链表</p>
+</li>
+<li>
+<p>允许null键和null值</p>
+</li>
+<li>
+<p>不保证有序，即元素的插入和读取顺序不保证一致</p>
+</li>
+<li>
+<p>也不保证元素的顺序始终不变，在扩容时，元素的顺序会重新被打乱</p>
+</li>
+</ul>
+<h3><span id="简述jdk7和jdk8中hash的区别">简述jdk7和jdk8中Hash的区别</span></h3>
+<ul>
+<li>
+<p>jdk7 数组+单链表 jdk8 数组+(单链表+红黑树)</p>
+</li>
+<li>
+<p>jdk7 链表头插 jdk8 链表尾插</p>
+<p>JDK1.7用的是头插法，而JDK1.8及之后使用的都是尾插法，那么他们为什么要这样做呢？因为JDK1.7是用单链表进行的纵向延伸，当采用头插法时会容易出现逆序且环形链表死循环问题。但是在JDK1.8之后是因为加入了红黑树使用尾插法，能够避免出现逆序且链表死循环的问题</p>
+</li>
+<li>
+<p>jdk7 先扩容再put jdk8 先put再扩容</p>
+<p>先扩容再put就是不管当前插入的值所属的桶是不是空，都先扩容，会造成无效扩容；先put在扩容，会在put时发现是否当前桶为空，即是否发生hash冲突，如果发生了就扩容，不发生就等下一次插入冲突或大于阀值时扩容</p>
+</li>
+<li>
+<p>jdk7 计算hash运算多 jdk8 计算hash运算少</p>
+</li>
+<li>
+<p>jdk7 受rehash影响 jdk8 调整后是(原位置)or(原位置+旧容量)</p>
+</li>
+<li>
+<p>JDK8增加了Spliterator进行遍历</p>
+</li>
+</ul>
+<h3><span id="源码分析">源码分析</span></h3>
+<p><strong>哈希函数</strong>计算结果越分散均匀，<strong>哈希碰撞</strong>的概率就越小，map的存取效率就会越高。</p>
+<p><strong>哈希表</strong>长度越长，空间成本越大，<strong>哈希函数</strong>计算结果越分散均匀。</p>
+<p><strong>扩容机制</strong>和<strong>哈希函数</strong>越合理， 空间成本越小，哈希函数计算结果越分散均匀。</p>
+<p><strong>负载因子</strong>越大（长度一定），最大结点容量越大，<strong>resize</strong>次数越少，空间成本越小，map的存取效率就会越高。</p>
+<p>桶数组<strong>初始容量</strong>（长度）越大（加载因子一定），最大结点容量越大，resize次数越少，空间成本越大，map的存取效率就会越高</p>
+<p>从HashMap的默认构造函数源码可知，构造函数就是对下面几个字段进行初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> threshold;             <span class="comment">// 最大node结点（键值对）容量，threshold = CAPACITY * LoadFactor，超过这个数目就重新resize(扩容)，扩容后的threshold是之前的两倍。</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">float</span> loadFactor;    <span class="comment">// 加载因子(HashMap默认值是0.75，建议不要修改)</span></span><br><span class="line"><span class="keyword">int</span> modCount;              <span class="comment">// 记录HashMap内部结构发生变化的次数，强调一点，内部结构发生变化指的是结构发生变化，例如put新键值对，但是某个key对应的value值被覆盖不属于结构变化。</span></span><br><span class="line"><span class="keyword">int</span> size,CAPACITY;      <span class="comment">// CAPACITY是桶数组的容量（桶的多少）(默认值是16)，扩容后也是之前的两倍，size是HashMap中实际存在的键值对数量</span></span><br></pre></td></tr></table></figure>
+<h4><span id="为什么加入红黑树">为什么加入红黑树</span></h4>
+<p>即使负载因子和哈希函数设计的再合理，也免不了会出现拉链过长（桶内结点过多）的情况，一旦出现拉链过长，则会严重影响HashMap的性能。</p>
+<p>于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树。而当链表长度太长（默认超过8）时自动扩容把链表转成红黑树的数据结构来把时间复杂度从O（n）变成O（logN）提高了效率，利用红黑树快速增删改查的特点提高HashMap的性能</p>
+<h4><span id="为什么在jdk18中进行对hashmap优化的时候把链表转化为红黑树的阈值是8而不是7或者不是20呢面试蘑菇街问过">为什么在JDK1.8中进行对HashMap优化的时候，把链表转化为红黑树的阈值是8,而不是7或者不是20呢（面试蘑菇街问过）？</span></h4>
+<p>如果选择6和8（如果链表小于等于6树还原转为链表，大于等于8转为树），中间有个差值7可以有效防止链表和树频繁转换。假设一下，如果设计成链表个数超过8则链表转换成树结构，链表个数小于8则树结构转换成链表，如果一个HashMap不停的插入、删除元素，链表个数在8左右徘徊，就会频繁的发生树转链表、链表转树，效率会很低。<br>
+还有一点重要的就是由于treenodes的大小大约是常规节点的两倍，因此我们仅在容器包含足够的节点以保证使用时才使用它们，当它们变得太小（由于移除或调整大小）时，它们会被转换回普通的node节点，容器中节点分布在hash桶中的频率遵循泊松分布，桶的长度超过8的概率非常非常小。所以作者应该是根据概率统计而选择了8作为阀值</p>
+<h4><span id="为什么在jdk17的时候是先进行扩容后进行插入而在jdk18的时候则是先插入后进行扩容的呢">为什么在JDK1.7的时候是先进行扩容后进行插入，而在JDK1.8的时候则是先插入后进行扩容的呢？</span></h4>
+<p>其实就是当这个Map中实际插入的键值对的值的大小如果大于这个默认的阈值的时候（初始是16*0.75=12）的时候才会触发扩容，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//其实就是当这个Map中实际插入的键值对的值的大小如果大于这个默认的阈值的时候（初始是16*0.75=12）的时候才会触发扩容，</span></span><br><span class="line"><span class="comment">//这个是在JDK1.8中的先插入后扩容</span></span><br><span class="line"><span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">            resize();</span><br></pre></td></tr></table></figure>
+<p>其实这个问题也是JDK8对HashMap中，主要是因为对链表转为红黑树进行的优化，因为你插入这个节点的时候有可能是普通链表节点，也有可能是红黑树节点，但是为什么1.8之后HashMap变为先插入后扩容的原因，我也有点不是很理解？欢迎来讨论这个问题？<br>
+但是在JDK1.7中的话，是先进行扩容后进行插入的，就是当你发现你插入的桶是不是为空，如果不为空说明存在值就发生了hash冲突，那么就必须得扩容，但是如果不发生Hash冲突的话，说明当前桶是空的（后面并没有挂有链表），那就等到下一次发生Hash冲突的时候在进行扩容，但是当如果以后都没有发生hash冲突产生，那么就不会进行扩容了，减少了一次无用扩容，也减少了内存的使用</p>
+<h5><span id="hashmap-17-18差异分析">HashMap 1.7 / 1.8差异分析</span></h5>
+<table>
+<thead>
+<tr>
+<th>差异种类</th>
+<th>HashMap 1.7</th>
+<th>HashMap 1.8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据结构</td>
+<td>数组+链表</td>
+<td>数组+链表+红黑树，当链表lenth&gt;8则转换为红黑树，在resize()后，所有数据位置会重新计算，如果红黑树的元素个数&lt;=6则转回链表</td>
+</tr>
+<tr>
+<td>初始化方式</td>
+<td>inflateTable()</td>
+<td>resize()</td>
+</tr>
+<tr>
+<td>hash计算方式</td>
+<td>hashCode()  , 扰动处理（4次位运算+5次异或运算）</td>
+<td>hashCode()  , 扰动处理（1次位运算+1次异或运算）</td>
+</tr>
+<tr>
+<td>数据存放方式</td>
+<td>无冲突时存放数组，有冲突时存放单链表</td>
+<td>无冲突时存放数组，有冲突存放链表（长度&lt;8）或红黑树(长度&gt;=8)</td>
+</tr>
+<tr>
+<td>数据插入方式</td>
+<td>头插法（将原有数据后移一位）</td>
+<td>尾插法（直接插入链表或红黑树尾部）</td>
+</tr>
+<tr>
+<td>扩容后存储位置的计算方式</td>
+<td>全部重新计算（hashCode()&gt;扰动处理&gt;&amp;(lenth-1)）</td>
+<td>原位置/原位置+老table.lenth</td>
+</tr>
+<tr>
+<td>扩容后转移老数据的方式</td>
+<td>头插法（原数据后移一位，会出现逆序，环形链表，死循环等问题）</td>
+<td>尾插法（不会出现逆序，环形列表，死循环等问题）</td>
+</tr>
+<tr>
+<td>扩容时机</td>
+<td>先判断&gt;阀值扩容后再插入</td>
+<td>先插入数据然后判断&gt;阀值扩容</td>
+</tr>
+<tr>
+<td>旧数据转移时的位置计算时机</td>
+<td>单独计算</td>
+<td>转移时统一计算</td>
+</tr>
+</tbody>
+</table>
+<p>HashMap死循环分析</p>
+<p>HashMap 导致 CPU 100% 的原因就是因为 HashMap 死循环导致的，那 HashMap 是如何造成死循环的？接下来我们一起来看。</p>
+<p>以 JDK 1.7 为例，假设 HashMap 的默认大小为 2，HashMap 本身中有一个键值 key(5)，我们再使用两个线程：t1 添加 key(3)，t2 添加 key(7)，首先两个线程先把 key(3) 和 key(7) 都添加到 HashMap 中，此时因为 HashMap 的长度不够用了就会进行扩容操作，然后这时线程 t1 在执行到 Entry&lt;K,V&gt; next = e.next; 时，交出了 CPU 的使用权，源代码如下：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void transfer(Entry[] <span class="keyword">new</span><span class="type">Table</span>, boolean rehash) &#123;</span><br><span class="line">    int <span class="keyword">new</span><span class="type">Capacity</span> = <span class="keyword">new</span><span class="type">Table</span>.length;</span><br><span class="line">    <span class="keyword">for</span> (Entry&lt;K,V&gt; e : <span class="type">table</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">null</span> != e) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; next = e.next; <span class="comment">// 线程一执行此处</span></span><br><span class="line">            <span class="keyword">if</span> (rehash) &#123;</span><br><span class="line">                e.hash = <span class="literal">null</span> == e.key ? <span class="number">0</span> : <span class="type">hash</span>(e.key);</span><br><span class="line">            &#125;</span><br><span class="line">            int i = indexFor(e.hash, <span class="keyword">new</span><span class="type">Capacity</span>);</span><br><span class="line">            e.next = <span class="keyword">new</span><span class="type">Table</span>[i];</span><br><span class="line">            <span class="keyword">new</span><span class="type">Table</span>[i] = e;</span><br><span class="line">            e = next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么此时线程 t1 中的 e 指向了 key(3)，而 next 指向了 key(7) ；之后线程 t2 重新 rehash 之后链表的顺序被反转，链表的位置变成了 key(5) -&gt; key(7) -&gt; key(3)，其中 “-&gt;” 用来表示下一个元素，当 t1 重新获得执行权之后，先执行 newTalbe[i] = e 把 key(3) 的 next 设置为 key(7)，而下次循环时查询到 key(7) 的 e.next 为 key(3)，于是就形 成了 key(3) 和 key(7) 的环形引用，就导致了死循环的产生，如下图所示：</p>
+<p><img src="./1.png" alt="img"></p>
+<p>HashMap 发生死循环的一个重要原因是 JDK 1.7 时链表的插入是首部倒序插入的，而 JDK 1.8 时已经变成了尾部插入，有人把这个死循环的问题反馈给了 Sun 公司，但它们认为这不是一个问题，因为 HashMap 本身就是非线程安全的，如果要在多线程使用建议使用 ConcurrentHashMap 替代 HashMap，但面试中这个问题被问的频率比较高，所以在这里就特殊说明一下</p>
+<h3><span id="问题的症状">问题的症状</span></h3>
+<p>从前我们的Java代码因为一些原因使用了HashMap这个东西，但是当时的程序是单线程的，一切都没有问题。后来，我们的程序性能有问题，所以需要变成多线程的，于是，变成多线程后到了线上，发现程序经常占了100%的CPU，查看堆栈，<strong>你会发现程序都Hang在了HashMap.get()这个方法上了</strong>，重启程序后问题消失。但是过段时间又会来。而且，这个问题在测试环境里可能很难重现。</p>
+<p>我们简单的看一下我们自己的代码，我们就知道HashMap被多个线程操作。而Java的文档说HashMap是非线程安全的，应该用ConcurrentHashMap。</p>
+<p>但是在这里我们可以来研究一下原因。</p>
+<h4><span id="hash表数据结构">Hash表数据结构</span></h4>
+<p>我需要简单地说一下HashMap这个经典的数据结构。</p>
+<p>HashMap通常会用一个指针数组（假设为table[]）来做分散所有的key，当一个key被加入时，会通过Hash算法通过key算出这个数组的下标i，然后就把这个&lt;key, value&gt;插到table[i]中，如果有两个不同的key被算在了同一个i，那么就叫冲突，又叫碰撞，这样会在table[i]上形成一个链表。</p>
+<p>我们知道，如果table[]的尺寸很小，比如只有2个，如果要放进10个keys的话，那么碰撞非常频繁，于是一个O(1)的查找算法，就变成了链表遍历，性能变成了O(n)，这是Hash表的缺陷（可参看《<a href="http://coolshell.cn/articles/6424.html" target="_blank" rel="noopener">Hash Collision DoS 问题</a>》）。</p>
+<p>所以，Hash表的尺寸和容量非常的重要。一般来说，Hash表这个容器当有数据要插入时，都会检查容量有没有超过设定的thredhold，如果超过，需要增大Hash表的尺寸，但是这样一来，整个Hash表里的元素都需要被重算一遍。这叫rehash，这个成本相当的大。</p>
+<p>相信大家对这个基础知识已经很熟悉了。</p>
+<h4><span id="hashmap的rehash源代码">HashMap的rehash源代码</span></h4>
+<p>下面，我们来看一下Java的HashMap的源代码。</p>
+<p>Put一个Key,Value对到Hash表中：</p>
+<p>检查容量是否超标</p>
+<p>新建一个更大尺寸的hash表，然后把数据从老的Hash表中迁移到新的Hash表中。</p>
+<p>迁移的源代码，注意高亮处：</p>
+<p>好了，这个代码算是比较正常的。而且没有什么问题。</p>
+<h4><span id="正常的rehash的过程">正常的ReHash的过程</span></h4>
+<p>画了个图做了个演示。</p>
+<ul>
+<li>
+<p>我假设了我们的hash算法就是简单的用key mod 一下表的大小（也就是数组的长度）。</p>
+</li>
+<li>
+<p>最上面的是old hash 表，其中的Hash表的size=2, 所以key = 3, 7, 5，在mod 2以后都冲突在table[1]这里了。</p>
+</li>
+<li>
+<p>接下来的三个步骤是Hash表 resize成4，然后所有的&lt;key,value&gt; 重新rehash的过程</p>
+</li>
+</ul>
+<p><img src="http://coolshell.cn//wp-content/uploads/2013/05/HashMap01.jpg" alt="img"></p>
+<h4><span id="并发下的rehash">并发下的Rehash</span></h4>
+<p>**1）假设我们有两个线程。**我用红色和浅蓝色标注了一下。</p>
+<p>我们再回头看一下我们的 transfer代码中的这个细节：</p>
+<p>而我们的线程二执行完成了。于是我们有下面的这个样子。</p>
+<p><img src="./HashMap02.png" alt="img"></p>
+<p>注意，<strong>因为Thread1的 e 指向了key(3)，而next指向了key(7)，其在线程二rehash后，指向了线程二重组后的链表</strong>。我们可以看到链表的顺序被反转后。</p>
+<p><strong>2）线程一被调度回来执行。</strong></p>
+<ul>
+<li><strong>先是执行 newTalbe[i] = e;</strong></li>
+<li><strong>然后是e = next，导致了e指向了key(7)，</strong></li>
+<li><strong>而下一次循环的next = e.next导致了next指向了key(3)</strong></li>
+</ul>
+<p><img src="./HashMap03.png" alt="img"></p>
+<p><strong>3）一切安好。</strong></p>
+<p>线程一接着工作。<strong>把key(7)摘下来，放到newTable[i]的第一个，然后把e和next往下移</strong>。</p>
+<p><img src="./HashMap04.png" alt="img"></p>
+<p><strong>4）环形链接出现。</strong></p>
+<p><strong>e.next = newTable[i] 导致  key(3).next 指向了 key(7)</strong></p>
+<p><strong>注意：此时的key(7).next 已经指向了key(3)， 环形链表就这样出现了。</strong></p>
+<p><img src="./HashMap05.png" alt="img"></p>
+<p><strong>于是，当我们的线程一调用到，HashTable.get(11)时，悲剧就出现了——Infinite Loop。</strong></p>
+<p><strong>此时两个线程put完毕，线程二先完成rehash，之后再线程一rehash，线程一最终put的链形成了闭环，但是这两个线程没有死循环，只是后来get的线程如果进入这个闭环链，就死循环了，并且进入的线程越多，CPU消耗的越大，最终到达100%</strong></p>
+<p>参考文章</p>
+<p>CSDN博主「依本多情」<a href="https://blog.csdn.net/qq_36520235/article/details/82417949" target="_blank" rel="noopener">https://blog.csdn.net/qq_36520235/article/details/82417949</a></p>
+<p>CSDN博主「酒吧七」<a href="https://blog.csdn.net/qq_36711757/article/details/80394272" target="_blank" rel="noopener">https://blog.csdn.net/qq_36711757/article/details/80394272</a></p>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/09/09/2019-09-09_MAC软件提示已损坏的解决方法 copy/" data-toggle="tooltip" data-placement="top" title="MAC【10.15】软件提示已损坏，需要移到废纸篓的解决方法">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+                <!-- gitment start -->
+                
+                      <div id="container"></div>
+                
+                  <!-- gitment end -->
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#面试" title="面试">面试</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://xuanxiaoming.info/" target="_blank">快乐晓明</a></li>
+                    
+                        <li><a href="http://www.sally.ren/" target="_blank">Sally</a></li>
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                        <li><a href="http://henglublog.com/" target="_blank">HengLu</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Gitment评论插件通用代码 -->
+
+
+    <link rel="stylesheet" href="/css/gitment.css">
+    <script src="/js/gitment.js"></script>
+    
+  <script>
+    var gitment = new Gitment({
+    id: 'Sat Nov 02 2019 13:40:40 GMT+0800', // optional
+    owner: 'xdmdpz',//github用户名
+    repo: 'xdmdpz.github.io',//用户存储评论的github项目名称
+    oauth: {
+      client_id: '2b847757e8c54f76a766',//注册OAuth Application时生产的ClinetID
+      client_secret:'f984148be84a530961e3d9fe93f243aa2d3ecba6',//注册OAuth Application时生成的Client Secret
+    },
+  })
+  gitment.render('container')
+  </script>
+
+
+<!-- Gitment代码结束 -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; if 2021
+                    <br>
+                    <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">津ICP备18000206号-1</a>
+                    <br>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xdmdpz&repo=xdmdpz.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xdmdpz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://xdmdpz.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
