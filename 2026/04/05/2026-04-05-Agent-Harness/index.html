@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一个写代码的胖子，一个不称职的摄影师">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Agent Harness：AI 驱动的代码生成实践 - xdmdpz | if
+        
+    </title>
+
+    <link rel="canonical" href="http://xdmdpz.github.io/2026/04/05/2026-04-05-Agent-Harness/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/beantech.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#AI" title="AI">AI</a>
+                            
+                              <a class="tag" href="/tags/#Agent" title="Agent">Agent</a>
+                            
+                        </div>
+                        <h1>Agent Harness：AI 驱动的代码生成实践</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by if on
+                            2026-04-05
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>一行代码都没写，五个月交付百万行产品——OpenAI 的 Agent Harness 实验启示</p>
+</blockquote>
+<h2><span id="前言">前言</span></h2>
+<p>在软件开发的历史长河中，&quot;人类写代码&quot;一直是不可撼动的铁律。然而，OpenAI 近期公布的一项实验彻底打破了这个认知：<strong>他们的团队在五个月内交付了一个拥有近百万行代码的产品，而其中没有一行是人工编写的</strong>。</p>
+<p>这不是概念验证，不是 POC，而是一个拥有真实用户、真实部署、真实迭代的商业级产品。</p>
+<span id="more"></span>
+<h2><span id="什么是-agent-harness">什么是 Agent Harness？</span></h2>
+<p>“Agent Harness”（智能体驾驭）是一种全新的软件开发范式：<strong>人类掌舵，智能体执行</strong>。</p>
+<p>简单来说，Harness 是一个让 AI 智能体能够可靠完成复杂任务的工程框架。它不仅仅是&quot;让 AI 写代码&quot;，而是要解决一个更深层的问题：</p>
+<blockquote>
+<p><strong>当代码吞吐量提升 10 倍时，人类工程师如何保持对系统的掌控？</strong></p>
+</blockquote>
+<p>传统的 Harness 概念源自测试领域——测试 Harness 用来连接被测系统与测试用例。而在 Agent 时代，Harness 的含义发生了根本转变：它成为了人类与 AI 智能体之间的协作协议。</p>
+<h2><span id="核心经验从quot说明书quot到quot地图quot">核心经验：从&quot;说明书&quot;到&quot;地图&quot;</span></h2>
+<p>实验中最有趣的发现之一是：<strong>给智能体的文档应该是一张地图，而不是一本说明书</strong>。</p>
+<p>团队最初尝试创建一个面面俱到的 <a href="http://AGENTS.md">AGENTS.md</a> 文件，结果失败了：</p>
+<ul>
+<li><strong>情境是稀缺资源</strong> — 巨大的指令文件会挤占实际任务所需的上下文</li>
+<li><strong>过多指导反而无效</strong> — 当一切都&quot;重要&quot;时，一切都不重要</li>
+<li><strong>文档会腐烂</strong> — 不被维护的指南很快就与现实脱节</li>
+<li><strong>难以核查</strong> — 单个大文件无法进行覆盖率、新鲜度检查</li>
+</ul>
+<p>正确的做法是：<strong>将 <a href="http://AGENTS.md">AGENTS.md</a> 变成内容目录</strong>。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">代码仓库知识库</span><br><span class="line">├── docs<span class="symbol">/</span>               <span class="comment"># 记录系统</span></span><br><span class="line">│   ├── architecture<span class="symbol">/</span>   <span class="comment"># 架构文档</span></span><br><span class="line">│   ├── design<span class="symbol">/</span>        <span class="comment"># 设计文档（含验证状态）</span></span><br><span class="line">│   └── plans<span class="symbol">/</span>         <span class="comment"># 执行计划</span></span><br><span class="line">└── AGENTS.md          <span class="comment"># 地图 (~100行)</span></span><br></pre></td></tr></table></figure>
+<p>智能体从一个&quot;小而稳定的入口&quot;开始，按需探索更深层次的信息——这就是<strong>渐进式披露</strong>。</p>
+<h2><span id="智能体优先的设计原则">智能体优先的设计原则</span></h2>
+<h3><span id="1-可观测性即基础设施">1. 可观测性即基础设施</span></h3>
+<p>为了让智能体能够验证和调试自己的输出，需要把应用对智能体&quot;可见&quot;：</p>
+<ul>
+<li><strong>日志、指标、追踪</strong> → 通过本地可观测性堆栈展示给智能体</li>
+<li><strong>UI 自动化</strong> → 接入 Chrome DevTools 协议，智能体可以截图、操控 DOM</li>
+<li><strong>临时环境</strong> → 每个任务在独立实例中运行，完成后连同日志一起销毁</li>
+</ul>
+<p>这意味着，像&quot;确保服务启动在 800ms 内完成&quot;这样的需求，变得完全可行。</p>
+<h3><span id="2-边界处的强类型约束">2. 边界处的强类型约束</span></h3>
+<p>团队发现，让智能体在<strong>边界处解析数据形状</strong>比让它自由发挥更可靠。强制执行不变量，让智能体能够快速交付而不必担心削弱基础。</p>
+<h3><span id="3-智能体对智能体的审核">3. 智能体对智能体的审核</span></h3>
+<p>人工 Code Review 并非必须。团队建立了智能体间的审核机制：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">人类描述任务 → Codex 执行 → 打开 <span class="keyword">PR</span></span><br><span class="line">    ↓</span><br><span class="line">Codex 自我审核 + 额外智能体审查</span><br><span class="line">    ↓</span><br><span class="line">响应反馈 → 循环直到所有人满意</span><br></pre></td></tr></table></figure>
+<p>结果：三名工程师平均每天处理 <strong>3.5 个 PRs</strong>，且随团队规模扩大而增加。</p>
+<h2><span id="关键洞察人类真正稀缺的是什么">关键洞察：人类真正稀缺的是什么？</span></h2>
+<p>实验揭示了一个深刻的事实：</p>
+<blockquote>
+<p><strong>当智能体可以完成几乎所有编码工作时，人类工程师唯一的稀缺资源是：时间和注意力。</strong></p>
+</blockquote>
+<p>因此，工程师的工作重心发生了转移：</p>
+<table>
+<thead>
+<tr>
+<th>传统模式</th>
+<th>Agent Harness 模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编写代码</td>
+<td>设计环境</td>
+</tr>
+<tr>
+<td>实现功能</td>
+<td>明确意图</td>
+</tr>
+<tr>
+<td>调试修复</td>
+<td>构建反馈回路</td>
+</tr>
+</tbody>
+</table>
+<p><strong>人类的角色变成了&quot;系统架构师&quot;和&quot;智能体协调者&quot;</strong>，而不是代码执行者。</p>
+<h2><span id="我们能学到什么">我们能学到什么？</span></h2>
+<ol>
+<li>
+<p><strong>渐进式上下文</strong> — 不要一次性塞给智能体所有信息，设计好导航结构让它按需获取</p>
+</li>
+<li>
+<p><strong>让系统对智能体友好</strong> — 可观测性、可测试性、清晰的边界——这些不仅是给人类工程师的礼物，也是给 AI 智能体的</p>
+</li>
+<li>
+<p><strong>文档即代码</strong> — 文档要版本化、交叉链接、可验证，避免成为&quot;腐烂的坟场&quot;</p>
+</li>
+<li>
+<p><strong>接受&quot;智能体优先&quot;的架构思维</strong> — 当智能体成为主要生产者，代码库的设计要以智能体的可读性为先</p>
+</li>
+</ol>
+<h2><span id="结语">结语</span></h2>
+<p>OpenAI 的实验并非要证明&quot;人类工程师将被取代&quot;，而是展示了一个新的可能：<strong>当繁琐的代码执行交给智能体，人类可以专注于真正需要创造力、判断力和系统思考的工作</strong>。</p>
+<p>Agent Harness 不仅仅是技术框架，更是一种思维方式的转变。它要求我们重新定义&quot;软件开发&quot;的边界，重新思考人与 AI 的协作模式。</p>
+<blockquote>
+<p><strong>未来已来。只是还未普及。</strong></p>
+</blockquote>
+<hr>
+<p><em>本文参考 OpenAI 官方博文 <a href="https://openai.com/zh-Hans-CN/index/harness-engineering/">Harness Engineering</a></em></p>
+<p><img src="/images/Agent-Harness_001.jpg" alt="Agent Harness 配图"></p>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2026/04/12/2026-04-12-Claude-Code-Harness/2026-04-12-Claude-Code-Harness/" data-toggle="tooltip" data-placement="top" title="Claude Code 源码泄露：一场关于 Agent 工程化的公开课">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2026/04/02/2026-04-02-AI-Brain-Fry/" data-toggle="tooltip" data-placement="top" title="AI Brain Fry：被 AI 效率反噬的认知危机">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+                <!-- gitment start -->
+                
+                      <div id="container"></div>
+                
+                  <!-- gitment end -->
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#AI" title="AI">AI</a>
+                        
+                          <a class="tag" href="/tags/#Agent" title="Agent">Agent</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://xuanxiaoming.info/" target="_blank">快乐晓明</a></li>
+                    
+                        <li><a href="http://www.sally.ren/" target="_blank">Sally</a></li>
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                        <li><a href="http://henglublog.com/" target="_blank">HengLu</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Gitment评论插件通用代码 -->
+
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    
+<script src="/js/gitment.js"></script>
+
+    
+  <script>
+    var gitment = new Gitment({
+    id: 'Sun Apr 05 2026 00:00:00 GMT+0800', // optional
+    owner: 'xdmdpz',//github用户名
+    repo: 'xdmdpz.github.io',//用户存储评论的github项目名称
+    oauth: {
+      client_id: '2b847757e8c54f76a766',//注册OAuth Application时生产的ClinetID
+      client_secret:'f984148be84a530961e3d9fe93f243aa2d3ecba6',//注册OAuth Application时生成的Client Secret
+    },
+  })
+  gitment.render('container')
+  </script>
+
+
+<!-- Gitment代码结束 -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; if 2026
+                    <br>
+                    <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">津ICP备18000206号-1</a>
+                    <br>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xdmdpz&repo=xdmdpz.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xdmdpz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://xdmdpz.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一个写代码的胖子，一个不称职的摄影师">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Claude Code 源码泄露：一场关于 Agent 工程化的公开课 - xdmdpz | if
+        
+    </title>
+
+    <link rel="canonical" href="http://xdmdpz.github.io/2026/03/11/2026-03-11-Claude-Code-Source-Leak/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/beantech.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#AI" title="AI">AI</a>
+                            
+                              <a class="tag" href="/tags/#Agent" title="Agent">Agent</a>
+                            
+                        </div>
+                        <h1>Claude Code 源码泄露：一场关于 Agent 工程化的公开课</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by if on
+                            2026-03-11
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Claude Code 源代码泄露的事情在 X 等平台上炸开了锅。但比起八卦本身，更值得挖的是这个事件暴露出的东西——一个成熟的 Autonomous Agent 产品，在模型之外那些真正难啃的骨头。</p>
+<p>Anthropic 的工程师们显然知道：真正的护城河不在于模型有多强，而在于把模型包裹起来的那层「脚手架」做得多扎实。这大概是 2026 年初最值得全行业认真读一读的技术文档。</p>
+<span id="more"></span>
+<h2><span id="01-当我们在聊-agent难的到底是什么">01 | 当我们在聊 Agent，难的到底是什么</span></h2>
+<p>Claude Code 的架构核心是一个叫 <strong>Harness</strong> 的本地运行时外壳。如果用人体的比喻，Harness 是身体，LLM 是大脑。身体负责呼吸、心跳、反射这些不需要思考的事，大脑只专注于真正需要智能的决策。</p>
+<p>这个划分有多重要？</p>
+<p>看看行业走过的弯路。第一代 Chatbot 无状态问答，第二代 Workflow 用 n8n、LangChain 这类工具把 LLM 嵌进 DAG 流——这两代的共同特点是<strong>代码在控制模型下一步做什么</strong>。模型是镶在流程里的一个节点，框架决定它什么时候被调用、怎么调用。</p>
+<p>第三代才是真正的 Autonomous Agent：模型控制循环，运行时只是执行器。Claude Code 属于第三代。</p>
+<p>Harness 这个词用得很准。它不是 framework，不是 runtime，而是一个<strong>让模型能在现实世界里行动的外壳</strong>。这个外壳提供文件系统访问、shell、分层记忆、声明式扩展，所有这些都在一个由可组合权限约束的有界自主循环里运行。</p>
+<p>说白了：给任何支持工具调用的 LLM 套上这个外壳，它就能在真实世界里干活了。模型可以换，外壳不需要换。</p>
+<p><strong>我的思考：</strong> 这个分层的思路其实很老派——Unix 的哲学，程序只做一件事并做好。但把它用到 Agent 架构上，意味着行业终于开始把模型当作一个「能被调用的服务」而不是「需要被管理的智能体」来设计。这是认识论上的转变。</p>
+<h2><span id="02-taor-loop让运行时变笨把智能留给模型">02 | TAOR Loop：让运行时变笨，把智能留给模型</span></h2>
+<p>Claude Code 的执行引擎是一个叫 <strong>TAOR</strong> 的循环：Think → Act → Observe → Repeat。</p>
+<p>循环本身不复杂，50 行代码能说清楚。但背后的设计哲学值得玩味——Orchestrator（编排器）被设计得极其「笨」，只负责驱动循环、执行工具调用、感知结果。所有推理、决策、何时停止，<strong>全部交给模型</strong>。</p>
+<p>运行时不知道代码是什么，不知道文件在哪，它只是跑循环，让模型决定下一步。</p>
+<p>这句话说出来简单，做起来需要对工程决策的极度克制。多数框架的本能是把编排逻辑写进代码——这里加个判断，那里加个分支，Orchestrator 越来越「聪明」，也越来越脆弱。</p>
+<p>Claude Code 的做法恰恰相反：<strong>把确定性留给框架，把智能下沉到模型</strong>。</p>
+<p>还有一个细节很有意思：工具层也遵循同样的「笨」哲学。Claude Code 没有给模型配备几十上百个专项工具，只提供四种能力原语——Read、Write、Execute、Connect。其中 Bash 是通用适配器，git、npm、docker 全部通过 shell 组合完成。</p>
+<blockquote>
+<p>不要构建 100 个工具，给模型一个 shell，让它自己组合。</p>
+</blockquote>
+<p>这句话值得裱起来。</p>
+<p><strong>我的思考：</strong> 很多人觉得 Agent 框架应该越来越聪明、越来越复杂。但 Claude Code 的思路是反直觉的——<strong>脚手架应该随着模型能力提升而变薄，而不是变厚</strong>。如果你每次模型升级都要往框架里加更多逻辑，说明你在对抗模型，而不是利用模型。这和做基础设施的思路是一样的：越底层的组件，越要抵抗增加复杂度的冲动。</p>
+<h2><span id="03-context-window-是稀缺资源不是越大越好">03 | Context Window 是稀缺资源，不是越大越好</span></h2>
+<p>这是整篇文章最让我有共鸣的一个观点。</p>
+<p>Context 不是越大越好，而是<strong>越干净越好</strong>。这是 Claude Code 整个架构里贯穿始终的设计原则。</p>
+<p>Context Collapse 是 Agent 系统最普遍的失败模式：对话进行下去，上下文窗口被填满，记忆退化，幻觉出现，Agent 开始在自己积累的噪音里迷失。Claude Code 把 Context Window 看成一种<strong>需要主动管理的稀缺资源</strong>，而不是可以随意挥霍的无限带宽。</p>
+<p>它构建了三层防御体系：</p>
+<p><strong>第一层：Auto-Compaction。</strong> Context 使用量达到约 50% 时自动触发，用 LLM 摘要替换原始对话轮次，释放空间同时保留关键决策。这不是简单截断历史，而是有策略的压缩。</p>
+<p><strong>第二层：Sub-Agent 隔离。</strong> 重型探索任务交给独立子 Agent，运行自己独立的 TAOR 循环，有自己的 Context 预算。任务完成后只返回摘要给主 Agent，主 Agent 的 Context 完全不受污染。</p>
+<p><strong>第三层：Prompt Cache 经济学。</strong> 代码里追踪了 14 个 cache-break 向量（会让 prompt 缓存失效的情况）。还有一个函数叫 <code>DANGEROUS_uncachedSystemPromptSection()</code>——光是这个命名本身就是一种文档：这里加东西要小心，会破坏缓存。</p>
+<p>当你为每个 token 付费的时候，缓存失效就不再是计算机科学笑话，而是一个<strong>财务问题</strong>。</p>
+<p>Session Continuity 也是一个被低估的设计：会话不是一次性的，像 git branch 一样运作，可以 checkpoint、rollback，或者把某个探索方向 fork 成一条新路径。Context 的管理不只在单次会话内，而是<strong>跨会话</strong>的。</p>
+<p><strong>我的思考：</strong> Context 管理本质上是一个资源调度问题，而资源调度从来都是工程里最脏、最难做好的活。多数人关注的是模型有多强，但我更关心的是——给定一个模型，谁能把 Context 管理得更精细，谁的 Agent 产品体验就更好。这不是靠模型升级能解决的，是工程问题。</p>
+<h2><span id="04-记忆是索引不是存储">04 | 记忆是索引，不是存储</span></h2>
+<p>Claude Code 的记忆系统设计，让很多人对「Agent 记忆」的理解需要重构。</p>
+<p>大多数人想象记忆就像一个更大的背包，装得越多越好。但 Claude Code 的记忆系统，更像是<strong>一个带有严格图书管理员的档案系统</strong>——核心原则是：能从代码库里重新推导出的信息，绝不应该被存储。</p>
+<p>它的记忆系统分为六层：Managed Policy → Project <a href="http://CLAUDE.md">CLAUDE.md</a> → User Preferences → Auto-Memory → Session → Sub-Agent Memory。每次会话启动时按层加载。</p>
+<p>Auto-Memory 循环甚至允许 Agent 学习用户的工作模式，并把这些模式写入 <a href="http://MEMORY.md">MEMORY.md</a> 供未来会话使用——用户不需要反复解释相同的事情，Agent 会从历史交互里自己记住。</p>
+<p>更有意思的是，这个系统有<strong>主动自我编辑能力</strong>：不仅会记录，还会重写、去重、甚至剪除互相矛盾的信息。过期且无效的记忆在这里被视为「负债」而非资产。</p>
+<p><strong>我的思考：</strong> 「记忆是负债」这个观点很反直觉，但细想很对。你存储的每一条信息都需要维护成本，信息之间还会产生不一致——这种不一致就是债务。好的记忆系统不是存得越多越好，而是该记住的记住，该忘的果断忘。大多数 Agent 产品在记忆层面做的只是存储，而不是管理。</p>
+<h2><span id="05-权限系统是-ux-问题信任是可组合的">05 | 权限系统是 UX 问题，信任是可组合的</span></h2>
+<p>Claude Code 的权限系统被设计为一个五档信任光谱：plan（只读）→ default（询问）→ acceptEdits（自动批审编辑）→ dontAsk（白名单内全通过）→ bypassPermissions（跳过所有检查）。</p>
+<p>每个工具调用都经过静态分析层的多层白名单校验，bashSecurity.ts 里有 23 项编号的安全检查——包括被阻止的 Zsh 内置命令、Unicode 零宽字符注入、IFS null-byte 注入，甚至还有一个在 HackerOne 审查期间发现的恶意 token 绕过。</p>
+<p>但更有意思的是 API 身份验证机制：API 请求在 JS 层之下做了加密验证。<code>cch=00000</code> 占位符在请求离开进程前被替换成计算出的哈希值，这个计算发生在 JS 层之下，对任何运行在 JS 里的代码完全不可见。</p>
+<p>本质上是<strong>在 HTTP 传输层实现的 API 调用 DRM</strong>。</p>
+<p>这就是 Anthropic 向 OpenCode 发律师函背后的技术基础——他们不只是在保护 API 密钥，而是在密码学层面证明了请求来自真实的 Claude Code 二进制文件，而不是第三方伪造的客户端。</p>
+<p><strong>我的思考：</strong> 权限设计是 Agent 产品从 Demo 走向企业生产环境的门槛。但 Claude Code 把它做到了一个更深的技术层面——不只是产品策略，而是密码学防御。这预示了一个趋势：<strong>未来 Agent 产品的护城河不只是模型能力，还有底层基础设施的可信度</strong>。</p>
+<h2><span id="06-kairos-的野心从不召唤的-agent">06 | KAIROS 的野心：从不召唤的 Agent</span></h2>
+<p>这次泄露还有一个彩蛋——一个还没发布的功能 <strong>KAIROS</strong>。</p>
+<p>它的特征很有意思：后台常驻、每日记忆蒸馏、GitHub Webhook 感知变化、每 5 分钟 Cron 调度刷新。拼在一起，是一个完全不同的产品形态：<strong>不是你召唤它，而是它一直在，主动为你工作</strong>。</p>
+<p>现有的 Claude Code 是召唤式 Agent：你打开终端，它来帮你；你关掉终端，它就停了。但 KAIROS 描绘的是下一代：Agent 在后台持续运行，感知代码库变化，每天晚上做记忆蒸馏，把当天的工作模式压缩进长期记忆，第二天已经「预热」好了。</p>
+<p><strong>我的思考：</strong> 这是两种完全不同的时间哲学。召唤式 Agent 活在用户的时间里，需要用户主动发起；KAIROS 这种常驻 Agent 活在自己的时间里，用户只是被通知的对象。如果 KAIROS 真的产品化，它重新定义的不只是工具，而是<strong>人机协作的工作模式</strong>——从「我用 AI 帮我做事」变成「AI 在后台替我守着事」。</p>
+<h2><span id="07-写在最后源码泄露的真正价值">07 | 写在最后：源码泄露的真正价值</span></h2>
+<p>Claude Code 的源码泄露，扒出了很多有意思的东西：Anti-Distillation 机制（API 请求里注入虚假工具定义来污染竞品模型的训练数据）、Undercover Mode（强制隐藏 Claude Code 在外部仓库里的存在）……</p>
+<p>这些工程决策充满争议——一边是合理的商业防御，一边是 AI 透明度的伦理困境。Anthropic 员工在开源项目里生成的 commit 和 PR，将没有任何 AI 参与的标记，这是好事还是坏事？</p>
+<p>但比起这些八卦，更值得记住的是这次泄露展示的<strong>完整的 Agent 工程化思路</strong>：Harness 设计、TAOR 循环、Context 管理、记忆索引、权限分层、多 Agent 编排。这些不是纸上谈兵，而是生产级产品的实战经验。</p>
+<p>行业里聊 Agent，太容易陷入「模型有多强」的叙事。但 Claude Code 用 1900 个文件、512,000 行 TypeScript 告诉我们：<strong>真正难的一直是模型之外的东西</strong>。</p>
+
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2026/04/02/2026-04-02-AI-Brain-Fry/" data-toggle="tooltip" data-placement="top" title="AI Brain Fry：被 AI 效率反噬的认知危机">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/11/02/2019-11-02_Hashmap相关知识点/" data-toggle="tooltip" data-placement="top" title="Hashmap相关知识点">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+                <!-- gitment start -->
+                
+                      <div id="container"></div>
+                
+                  <!-- gitment end -->
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#AI" title="AI">AI</a>
+                        
+                          <a class="tag" href="/tags/#Agent" title="Agent">Agent</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://xuanxiaoming.info/" target="_blank">快乐晓明</a></li>
+                    
+                        <li><a href="http://www.sally.ren/" target="_blank">Sally</a></li>
+                    
+                        <li><a href="http://mannyjossy.com" target="_blank">Manny&amp;amp;Jossy</a></li>
+                    
+                        <li><a href="http://dp199313.github.io" target="_blank">陆崖</a></li>
+                    
+                        <li><a href="http://qmweb.cc" target="_blank">Terry Blog</a></li>
+                    
+                        <li><a href="http://cg-man.github.io" target="_blank">CG菌</a></li>
+                    
+                        <li><a href="http://henglublog.com/" target="_blank">HengLu</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Gitment评论插件通用代码 -->
+
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    
+<script src="/js/gitment.js"></script>
+
+    
+  <script>
+    var gitment = new Gitment({
+    id: 'Wed Mar 11 2026 00:00:00 GMT+0800', // optional
+    owner: 'xdmdpz',//github用户名
+    repo: 'xdmdpz.github.io',//用户存储评论的github项目名称
+    oauth: {
+      client_id: '2b847757e8c54f76a766',//注册OAuth Application时生产的ClinetID
+      client_secret:'f984148be84a530961e3d9fe93f243aa2d3ecba6',//注册OAuth Application时生成的Client Secret
+    },
+  })
+  gitment.render('container')
+  </script>
+
+
+<!-- Gitment代码结束 -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/xdmdpz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; if 2026
+                    <br>
+                    <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">津ICP备18000206号-1</a>
+                    <br>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=xdmdpz&repo=xdmdpz.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://xdmdpz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://xdmdpz.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
