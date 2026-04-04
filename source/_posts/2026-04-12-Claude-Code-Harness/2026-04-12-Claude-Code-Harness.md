@@ -1,4 +1,14 @@
-![cover](./image.jpg)
+---
+title: Claude Code 源码泄露：一场关于 Agent 工程化的公开课
+date: 2026-04-12 00:00:00
+tags:
+  - AI
+  - Agent
+categories:
+  - 技术思考
+photos:
+  - ./image.jpg
+---
 
 # Claude Code 源码泄露：一场关于 Agent 工程化的公开课
 

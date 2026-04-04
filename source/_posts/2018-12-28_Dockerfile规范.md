@@ -1,5 +1,5 @@
 ---
-title: Dockerfile规范
+title: Dockerfile规范
 date: 2018-12-28 14:50:40
 tags: docker,dockerfile
 header-img: "/img/if/DSC_7885.jpg"
