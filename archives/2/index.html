@@ -223,6 +223,37 @@
 
 <div class="post-preview">
 
+    <a href="/2019/01/11/2019-01-11_docker时区/">
+        <h2 class="post-title">
+            Docker 设置时区
+        </h2>
+        <h3 class="post-subtitle">
+            按照最近项目的开发习惯
+        </h3>
+        <div class="post-content-preview">
+            Dockerfile 里设定 timezone
+给 Java 等自带时区信息的程序使用只需要类似 ENV TZ=Asia/Shanghai 即可，需要整个容器设置或者程序没有自带时区的使用下面的方法。
+Spring boot 项目设置timezone
+1ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd=file:/dev/./ura......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by if on
+            2019-01-11
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#docker" title="docker">docker</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/01/10/2019-01-10_Java包装类常量池问题/">
         <h2 class="post-title">
             Java包装类常量池问题
@@ -538,38 +569,6 @@ brew install thefuck
         <div class="tags">
             
               <a href="/tags/#Mac,提升效率" title="Mac,提升效率">Mac,提升效率</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/11/2018-10-11_CentOS-JAVA开发环境/">
-        <h2 class="post-title">
-            CentOS-JAVA开发环境
-        </h2>
-        <h3 class="post-subtitle">
-            最近在用vagrant做一个hadoop的集群，把安装java之类的命令提出来了
-        </h3>
-        <div class="post-content-preview">
-            安装jdk
-
-oracle jdk
-
-1234567yum -y remove java*yum -y install wget#具体版本替换下就好wget --header &quot;Cookie: oraclelicense=accept-securebackup-cookie&quot; http://download.oracle.com/otn-pub/java/jdk/8u17......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by if on
-            2018-10-11
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#java,linux" title="java,linux">java,linux</a>
             
         </div>
     
